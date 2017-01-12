@@ -10,7 +10,7 @@ $PAGE->set_context(get_system_context());
 $PAGE->set_pagelayout('admin');
 $PAGE->set_title("Course Creator");
 $PAGE->set_heading("Course Creator");
-$PAGE->set_url($CFG->wwwroot.'/addcourse.php');
+$PAGE->set_url($CFG->wwwroot.'/local/courseseditor/nuovo.php');
 
 echo $OUTPUT->header();
 echo('<h2>Crea un nuovo corso</h2><br><div>');
