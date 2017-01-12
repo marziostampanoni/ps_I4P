@@ -1,9 +1,4 @@
 <?php
-/**
- * @package    local_netidsync
- * @copyright  2014 Guglielmo Fachini {@link http://fachini.net}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 
 defined('MOODLE_INTERNAL') || die();
 
