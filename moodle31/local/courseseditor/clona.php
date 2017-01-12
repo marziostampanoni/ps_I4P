@@ -13,7 +13,7 @@ $PAGE->set_heading("Course Creator");
 $PAGE->set_url($CFG->wwwroot.'/addcourse.php');
 
 echo $OUTPUT->header();
-echo('<h2>Effettua la tua richiesta</h2><br><div>');
+echo('<h2>Clona un corso esistente</h2><br><div>');
 $form = new mainchoiceform(); //puoi passare l'action del form come parametro in costruzione.ai
 if ($fromform = $form->get_data()) {
     // This branch is where you process validated data.
@@ -23,7 +23,6 @@ if ($fromform = $form->get_data()) {
     // can see what they did.
     redirect($nexturl);
 }
-$form->display();
 ?>
 
 

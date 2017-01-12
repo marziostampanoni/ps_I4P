@@ -9,17 +9,15 @@
 
 require_once("$CFG->libdir/formslib.php");
 
-class mainchoiceform extends moodleform {
+class mainchoiceform extends moodleform
+{
 
-    function definition() {
-        global $CFG;
-
-        $mform = $this->_form; // Don't forget the underscore!
-
-        $mform->addElement('button', 'crea', 'Nuovi Corsi');
-        $mform->addElement('button', 'clona', 'Clona corsi esistenti');
-        $mform->addElement('button', 'cancella', 'Cancella corsi esistenti');
-
+    function definition()
+    {
+        $form = $this->_form; // Don't forget the underscore!
+        $form->addElement('button', 'intro', "Nuovi corsi", array('style' => 'width:200px;', 'onClick' => 'updateURL(\'nuovo\');'));
+        $form->addElement('button', 'intro', "Clona corsi esistenti", array('style' => 'width:200px;,', 'onClick' => 'updateURL(\'clona\');'));
+        $form->addElement('button', 'intro', "Cancella corsi esistenti", array('style' => 'width:200px;', 'onClick' => 'updateURL(\'cancella\');'));
     }
 }
 
