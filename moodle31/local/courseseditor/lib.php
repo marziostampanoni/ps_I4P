@@ -7,9 +7,20 @@
  */
 
 function local_courseseditor_extend_navigation(global_navigation $navigation) {
-    if ($home = $navigation->find('home', global_navigation::TYPE_SETTING)) {
-        $home->remove();
+    $strfoo = get_string('foo', 'local_myplugin');
+    $url = new moodle_url('/local/courseseditor/start.php', array('id' => $PAGE->course->id));
+    $foonode = navigation_node::create(
+        $strfoo,
+        $url,
+        navigation_node::NODETYPE_LEAF,
+        'myplugin',
+        'myplugin',
+        new pix_icon('t/addcontact', $strfoo)
+    );
+    if ($PAGE->url->compare($url, URL_MATCH_BASE)) {
+        $foonode->make_active();
     }
+    $settingnode->add_node($foonode);
 }
 
 function local_courseseditor_extend_settings_navigation($settingsnav, $context) {
