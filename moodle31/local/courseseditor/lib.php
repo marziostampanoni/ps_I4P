@@ -6,21 +6,16 @@
  * Time: 19:07
  */
 
+
+$previewnode = $PAGE->navigation->add(get_string('preview'), new moodle_url('/a/link/if/you/want/one.php'), navigation_node::TYPE_CONTAINER);
+$thingnode = $previewnode->add(get_string('name of thing'), new moodle_url('/a/link/if/you/want/one.php'));
+$thingnode->make_active();
+
 function local_courseseditor_extend_navigation(global_navigation $navigation) {
-    $strfoo = get_string('foo', 'local_myplugin');
-    $url = new moodle_url('/local/courseseditor/start.php', array('id' => $PAGE->course->id));
-    $foonode = navigation_node::create(
-        $strfoo,
-        $url,
-        navigation_node::NODETYPE_LEAF,
-        'myplugin',
-        'myplugin',
-        new pix_icon('t/addcontact', $strfoo)
-    );
-    if ($PAGE->url->compare($url, URL_MATCH_BASE)) {
-        $foonode->make_active();
-    }
-    $settingnode->add_node($foonode);
+
+    //$previewnode = $PAGE->navigation->add(get_string('pluginname'), new moodle_url('/a/link/if/you/want/one.php'), navigation_node::TYPE_CONTAINER);;
+    //$thingnode = $previewnode->add(get_string('name of thing'), new moodle_url('/a/link/if/you/want/one.php'));
+    //$thingnode->make_active();
 }
 
 function local_courseseditor_extend_settings_navigation($settingsnav, $context) {
