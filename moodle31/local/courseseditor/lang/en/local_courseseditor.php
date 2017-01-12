@@ -15,6 +15,6 @@ $string['pluginname_desc'] = 'This plugin ...';
 
 $string['usi_host_name'] = 'USI Host';
 $string['usi_host_description'] = 'The address of the USI server';
-$string['supsi_host_name'] = 'USI Host';
-$string['supsi_host_description'] = 'The address of the USI server';
+$string['supsi_host_name'] = 'SUPSI Host';
+$string['supsi_host_description'] = 'The address of the SUPSI server';
 
