@@ -8,8 +8,8 @@
 
 
 function local_courseseditor_extend_navigation(global_navigation $navigation) {
-    global $USER;
-    var_dump($USER);
+//context_user::instance(
+    var_dump($GLOBALS['USER']);
     $node = $navigation->add(get_string('pluginname','local_courseseditor'), new moodle_url('/local/courseseditor/start.php'), navigation_node::TYPE_CONTAINER);;
     $node->add(get_string('new_courses','local_courseseditor'), new moodle_url('/local/courseseditor/nuovo.php'));
     $node->add(get_string('clone_courses','local_courseseditor'), new moodle_url('/local/courseseditor/clona.php'));
