@@ -10,14 +10,17 @@
 function local_courseseditor_extend_navigation(global_navigation $navigation) {
     global $USER;
 
-    //if (!has_capability('local/courseseditor:use', context_user::instance($USER->id))) {
-      //  echo " hi hi hi";
-       // return;
-    //}
+    if (!isloggedin()) {
+        return;
+    }
+
     $node = $navigation->add(get_string('pluginname','local_courseseditor'), new moodle_url('/local/courseseditor/start.php'), navigation_node::TYPE_CONTAINER);;
     $node->add(get_string('new_courses','local_courseseditor'), new moodle_url('/local/courseseditor/nuovo.php'));
     $node->add(get_string('clone_courses','local_courseseditor'), new moodle_url('/local/courseseditor/clona.php'));
     $node->add(get_string('delete_courses','local_courseseditor'), new moodle_url('/local/courseseditor/cancella.php'));
+    if (!is_siteadmin()) {
+        return;
+    }
     $node->add(get_string('manage_courses','local_courseseditor'), new moodle_url('/local/courseseditor/manage.php'));
 
 }

@@ -12,6 +12,7 @@ $PAGE->set_title("Course manager");
 $PAGE->set_heading("Course manager");
 //$PAGE->set_url($CFG->wwwroot.'/local/courseseditor/manage.php');
 require_login();
+has_capability('local')
 
 echo $OUTPUT->header();
 echo('<h2>Manage requests</h2><br><div>');
