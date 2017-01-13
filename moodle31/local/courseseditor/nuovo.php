@@ -13,6 +13,7 @@ $PAGE->set_heading("Course Creator");
 //$PAGE->set_url($CFG->wwwroot.'/local/courseseditor/nuovo.php');
 require_login();
 
+
 echo $OUTPUT->header();
 echo('<h2>Crea un nuovo corso</h2><br><div>');
 $form = new mainchoiceform(); //puoi passare l'action del form come parametro in costruzione.ai

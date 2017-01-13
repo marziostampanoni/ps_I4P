@@ -12,7 +12,11 @@ $PAGE->set_title("Course manager");
 $PAGE->set_heading("Course manager");
 //$PAGE->set_url($CFG->wwwroot.'/local/courseseditor/manage.php');
 require_login();
-has_capability('local')
+
+if(!has_capability('local/courseseditor:manage',context_user::instance($USER->id),$USER->id,TRUE)){
+    echo "Non hai i diritti per vedere questa pagina";
+    return;
+}
 
 echo $OUTPUT->header();
 echo('<h2>Manage requests</h2><br><div>');
