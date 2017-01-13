@@ -10,10 +10,10 @@ $PAGE->set_context(get_system_context());
 $PAGE->set_pagelayout('admin');
 $PAGE->set_title("Course manager");
 $PAGE->set_heading("Course manager");
-$PAGE->set_url($CFG->wwwroot.'/local/courseseditor/manage.php');
+//$PAGE->set_url($CFG->wwwroot.'/local/courseseditor/manage.php');
 
 echo $OUTPUT->header();
-echo('<h2>Clona un corso esistente</h2><br><div>');
+echo('<h2>Manage requests</h2><br><div>');
 $form = new mainchoiceform(); //puoi passare l'action del form come parametro in costruzione.ai
 if ($fromform = $form->get_data()) {
     // This branch is where you process validated data.
