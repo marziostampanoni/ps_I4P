@@ -11,6 +11,7 @@ $PAGE->set_pagelayout('admin');
 $PAGE->set_title("Course Creator");
 $PAGE->set_heading("Course Creator");
 //$PAGE->set_url($CFG->wwwroot.'/local/courseseditor/nuovo.php');
+require_login();
 
 echo $OUTPUT->header();
 echo('<h2>Crea un nuovo corso</h2><br><div>');

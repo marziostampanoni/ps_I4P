@@ -6,11 +6,12 @@ require_once('../../config.php');
 require_once('mainchoiceform.php');
 
 
-$PAGE->set_context(get_system_context());
+$PAGE->set_context(context_system::instance());
 $PAGE->set_pagelayout('admin');
 $PAGE->set_title("Course Creator");
 $PAGE->set_heading("Course Creator");
-//$PAGE->set_url($CFG->wwwroot.'/local/courseseditor/cancella.php');
+$PAGE->set_url($CFG->wwwroot.'/local/courseseditor/cancella.php');
+require_login();
 
 echo $OUTPUT->header();
 echo('<h2>Cancella un corso esistente</h2><br><div>');
