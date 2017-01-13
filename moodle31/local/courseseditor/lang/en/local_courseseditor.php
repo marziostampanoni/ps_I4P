@@ -13,6 +13,7 @@ $string['pluginname_desc'] = 'This plugin ...';
 $string['new_courses'] = 'New courses';
 $string['clone_courses'] = 'Clone courses';
 $string['delete_courses'] = 'Delete courses';
+$string['manage_courses'] = 'Manage courses';
 
 /**
  * Settings

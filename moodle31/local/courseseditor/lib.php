@@ -12,6 +12,7 @@ function local_courseseditor_extend_navigation(global_navigation $navigation) {
     $node->add(get_string('new_courses','local_courseseditor'), new moodle_url('/local/courseseditor/nuovo.php'));
     $node->add(get_string('clone_courses','local_courseseditor'), new moodle_url('/local/courseseditor/clona.php'));
     $node->add(get_string('delete_courses','local_courseseditor'), new moodle_url('/local/courseseditor/cancella.php'));
+    $node->add(get_string('manage_courses','local_courseseditor'), new moodle_url('/local/courseseditor/manage.php'));
 
 }
 
