@@ -9,15 +9,8 @@
 
 require_once("$CFG->libdir/formslib.php");
 
-class FormClona extends moodleform
+class FormNuovo extends moodleform
 {
-    var $corsi=null;
-
-    function setCorsi($corsi){
-
-        $this->corsi=$corsi;
-        var_dump($this->corsi);
-    }
     protected function definition()
     {
         global $USER,$DB;

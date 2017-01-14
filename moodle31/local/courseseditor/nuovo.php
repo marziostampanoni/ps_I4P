@@ -15,15 +15,11 @@ require_login();
 echo $OUTPUT->header();
 echo('<h2>Crea un nuovo corso</h2><br><div>');
 
-$form = new NuovoForm();
+$form = new FormNuovo();
 if ($fromform = $form->get_data()) {
     var_dump($fromform);
     //redirect($nexturl);
-}else{
-
-    $form->display();
 }
-
 
 $form->display();
 ?>

@@ -15,14 +15,11 @@ require_login();
 
 echo $OUTPUT->header();
 echo('<h2>Clona un corso esistente</h2><br><div>');
-$form = new mainchoiceform(); //puoi passare l'action del form come parametro in costruzione.ai
+
 $form = new FormClona();
 if ($fromform = $form->get_data()) {
     var_dump($fromform);
     //redirect($nexturl);
-}else{
-
-    $form->display();
 }
 
 
