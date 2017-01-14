@@ -15,7 +15,7 @@ require_login();
 
 echo $OUTPUT->header();
 echo('<h2>'.get_string('start_page_title','local_courseseditor').'</h2><br><div>');
-$form = new startForm(); //puoi passare l'action del form come parametro in costruzione.ai
+$form = new FormStart(); //puoi passare l'action del form come parametro in costruzione.ai
 if ($fromform = $form->get_data()) {
     // This branch is where you process validated data.
     // Do stuff ...

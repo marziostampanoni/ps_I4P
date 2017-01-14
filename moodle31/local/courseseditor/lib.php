@@ -8,7 +8,7 @@
 
 
 function local_courseseditor_extend_navigation(global_navigation $navigation) {
-    global $USER;
+    global $USER, $PAGE;
 
     if (!isloggedin()) {
         return;
@@ -18,6 +18,10 @@ function local_courseseditor_extend_navigation(global_navigation $navigation) {
     $node->add(get_string('new_courses','local_courseseditor'), new moodle_url('/local/courseseditor/nuovo.php'));
     $node->add(get_string('clone_courses','local_courseseditor'), new moodle_url('/local/courseseditor/clona.php'));
     $node->add(get_string('delete_courses','local_courseseditor'), new moodle_url('/local/courseseditor/cancella.php'));
+    if($PAGE->url == new moodle_url('/local/courseseditor/resume.php')){
+        $node->add(get_string('resume_courses','local_courseseditor'), new moodle_url('/local/courseseditor/resume.php'));
+    }
+
     if (!is_siteadmin()) {
         return;
     }

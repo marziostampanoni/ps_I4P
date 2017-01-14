@@ -29,14 +29,14 @@ WHERE u.id=? AND (r.shortname = 'teacher' OR r.shortname = 'editingteacher' OR r
                 foreach ($courses as $corso) {
                     if (isset($catcourses[$corso->instanceid])) {
                         if ($label) {
-                            $form->addElement('html', '<b>' . $cat . '</b><br><hr>');
+                            $form->addElement('html', '<br><hr><b>' . $cat . '</b><br><hr>');
                             $label = false;
                         }
                         $details = '<b>' . $corso->fullname . '</b> - ' . $cat . ', Ruolo: ' . $corso->archetype;
 
-                        $form->addElement('checkbox', 'name-'.$corso->instanceid, '', $details, array('value' => 'asd'), array('value' => 'asd'));
-                        $data = array('id'=>$corso->instanceid,'title'=>$corso->fullname,'cat'=>$cat,'teachers'=>array('id_teacher1'=>'name_teacher1TODO'),'editingteacher'=>array('id_editingteacher1','name_editingteacher1TODO'));
-                        $form->addElement('hidden', 'data-'.$corso->instanceid, json_encode($data));
+                        $form->addElement('checkbox', 'name-' . $corso->instanceid, '', $details, array('value' => 'asd'), array('value' => 'asd'));
+                        $data = array('id' => $corso->instanceid, 'title' => $corso->fullname, 'cat' => $cat, 'teachers' => array(array('id' => 'id_teacher1', 'name' => 'name_teacher1TODO'), array('id' => 'id_teacher2', 'name' => 'name_teacher2TODO')), 'editingteacher' => array(array('id' => 'id_editingteacher1', 'name' => 'name_editingteacher1TODO'), array('id' => 'id_editingteacher2', 'name' => 'name_editingteacher2TODO')));
+                        $form->addElement('hidden', 'data-' . $corso->instanceid, json_encode($data));
 
                     }
                 }
@@ -45,6 +45,6 @@ WHERE u.id=? AND (r.shortname = 'teacher' OR r.shortname = 'editingteacher' OR r
         }
 
 
-        $form->addElement('submit', 'next', get_string("btnnext", 'local_courseseditor'));
+        $form->addElement('submit', 'next', get_string("clone_next", 'local_courseseditor'));
     }
 }

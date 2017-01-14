@@ -15,12 +15,18 @@ $string['new_courses'] = 'New courses';
 $string['clone_courses'] = 'Clone courses';
 $string['delete_courses'] = 'Delete courses';
 $string['manage_courses'] = 'Manage courses';
+$string['resume_courses'] = 'Resume';
 
 $string['clone_page_title'] = 'Clone existing courses:';
 $string['clone_next'] = 'Confirm and continue';
 
 $string['resume_page_title'] = 'Resume:';
-
+$string['resume_tablehead_title'] = 'Title';
+$string['resume_tablehead_cat'] = 'Cathegory';
+$string['resume_tablehead_teacher'] = 'Assistant';
+$string['resume_tablehead_editingteacher'] = 'Teacher';
+$string['resume_tablehead_note'] = 'Note';
+$string['resume_next'] = 'Save';
 /**
  * Settings
  */

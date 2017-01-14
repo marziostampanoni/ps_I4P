@@ -1,7 +1,7 @@
 <?php
 require_once("$CFG->libdir/formslib.php");
 
-class startForm extends moodleform
+class FormStart extends moodleform
 {
 
     function definition()
