@@ -35,7 +35,7 @@ curl_close($ch);
 
 $result=json_decode($result);
 
-$form = new FormNuovo(NULL,array('cosri'=>$result));
+$form = new FormNuovo(NULL,array('corsi'=>$result));
 
 if ($fromform = $form->get_data()) {
     var_dump($fromform);
