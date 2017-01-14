@@ -21,8 +21,6 @@ if ($fromform = $form->get_data()) {
     var_dump($fromform);
     //redirect($nexturl);
 }
-
-
 $form->display();
 ?>
 
@@ -31,11 +29,3 @@ $form->display();
 echo('</div>');
 echo $OUTPUT->footer();
 ?>
-
-<script>
-    function updateURL(a){
-        var form = document.getElementById('mform1');
-        form.setAttribute('action', 'http://localhost:8888/moodle31/local/courseseditor/'+a+'.php');
-        form.submit();
-    }
-</script>

@@ -32,10 +32,11 @@ $result=curl_exec($ch);
 curl_close($ch);
 
 // Will dump a beauty json :3
-var_dump($result);
 
+$result=json_decode($result);
 
-$form = new FormNuovo();
+$form = new FormNuovo(NULL,array('cosri'=>$result));
+
 if ($fromform = $form->get_data()) {
     var_dump($fromform);
     //redirect($nexturl);

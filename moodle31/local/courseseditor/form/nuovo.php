@@ -24,8 +24,13 @@ class FormNuovo extends moodleform
         //}
 
         $form = $this->_form;
-        //$select = $form->addElement('select', 'corsi', get_string('Corsi'), $statesArray);
-       // $select->setMultiple(true);
+        $statesArray=array();
+        foreach ($this->_customdata['corsi'] as $corso){
+            var_dump($corso);
+            $statesArray[]=$corso->titolo.', '.$corso->facolta.', '.$corso->corso_laurea.' Ruolo :'.implode(',',$corso->docenti);
+        }
+        $select = $form->addElement('select', 'corsi', get_string('Corsi'), $statesArray);
+        $select->setMultiple(true);
 
         $form->addElement('button', 'intro', "Next", array('style' => 'width:50px;', 'onClick' => 'updateURL(\'nuovo\');'));
     }
