@@ -3,26 +3,27 @@
 
 // The number of lines in front of config file determine the // hierarchy of files.
 require_once('../../config.php');
-require_once('mainchoiceform.php');
+require_once('form/clona.php');
 
 
 $PAGE->set_context(get_system_context());
 $PAGE->set_pagelayout('admin');
 $PAGE->set_title("Course Creator");
 $PAGE->set_heading("Course Creator");
-$PAGE->set_url($CFG->wwwroot.'/addcourse.php');
+//$PAGE->set_url($CFG->wwwroot.'/local/courseseditor/clona.php');
+require_login();
 
 echo $OUTPUT->header();
 echo('<h2>Clona un corso esistente</h2><br><div>');
-$form = new mainchoiceform(); //puoi passare l'action del form come parametro in costruzione.ai
-if ($fromform = $form->get_data()) {
-    // This branch is where you process validated data.
-    // Do stuff ...
 
-    // Typically you finish up by redirecting to somewhere where the user
-    // can see what they did.
-    redirect($nexturl);
+$form = new FormClona();
+if ($fromform = $form->get_data()) {
+    var_dump($fromform);
+    //redirect($nexturl);
 }
+
+
+$form->display();
 ?>
 
 

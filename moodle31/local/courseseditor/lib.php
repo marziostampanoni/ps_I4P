@@ -8,13 +8,23 @@
 
 
 function local_courseseditor_extend_navigation(global_navigation $navigation) {
-    global $PAGE;
-    $node = $PAGE->navigation->add(get_string('pluginname','local_courseseditor'), new moodle_url('/local/courseseditor/start.php'), navigation_node::TYPE_CONTAINER);;
+    global $USER;
 
-    $node1 = $node->add(get_string('new_courses','local_courseseditor'), new moodle_url('/local/courseseditor/nuovo.php'));
-    $node1->make_active();
-    $node2 = $node->add(get_string('clone_courses','local_courseseditor'), new moodle_url('/local/courseseditor/clona.php'));
-    $node2->make_active();
-    $node3 = $node->add(get_string('delete_courses','local_courseseditor'), new moodle_url('/local/courseseditor/cancella.php'));
-    $node3->make_active();
+    if (!isloggedin()) {
+        return;
+    }
+
+    $node = $navigation->add(get_string('pluginname','local_courseseditor'), new moodle_url('/local/courseseditor/start.php'), navigation_node::TYPE_CONTAINER);;
+    $node->add(get_string('new_courses','local_courseseditor'), new moodle_url('/local/courseseditor/nuovo.php'));
+    $node->add(get_string('clone_courses','local_courseseditor'), new moodle_url('/local/courseseditor/clona.php'));
+    $node->add(get_string('delete_courses','local_courseseditor'), new moodle_url('/local/courseseditor/cancella.php'));
+    if (!is_siteadmin()) {
+        return;
+    }
+    $node->add(get_string('manage_courses','local_courseseditor'), new moodle_url('/local/courseseditor/manage.php'));
+
+}
+
+function local_courseseditor_extend_settings_navigation($settingsnav, $context) {
+
 }

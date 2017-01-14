@@ -10,7 +10,8 @@ $PAGE->set_context(get_system_context());
 $PAGE->set_pagelayout('admin');
 $PAGE->set_title("Course Creator");
 $PAGE->set_heading("Course Creator");
-$PAGE->set_url($CFG->wwwroot.'/addcourse.php');
+//$PAGE->set_url($CFG->wwwroot.'/local/courseseditor/start.php');
+require_login();
 
 echo $OUTPUT->header();
 echo('<h2>Effettua la tua richiesta</h2><br><div>');
