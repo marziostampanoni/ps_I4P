@@ -3,28 +3,36 @@
 
 // The number of lines in front of config file determine the // hierarchy of files.
 require_once('../../config.php');
-require_once('mainchoiceform.php');
+require_once('form/nuovo.php');
 
 
 $PAGE->set_context(get_system_context());
 $PAGE->set_pagelayout('admin');
 $PAGE->set_title("Course Creator");
 $PAGE->set_heading("Course Creator");
-//$PAGE->set_url($CFG->wwwroot.'/local/courseseditor/nuovo.php');
 require_login();
 
+//$courses = get_courses();
+$query="
+SELECT *  FROM
+mdl_user u
+JOIN mdl_role_assignments ra ON ra.userid = u.id
+JOIN mdl_role r ON ra.roleid = r.id
+JOIN mdl_context con ON ra.contextid = con.id
+JOIN mdl_course c ON c.id = con.instanceid AND con.contextlevel = 50
+WHERE u.id=? AND (r.shortname = 'teacher' OR r.shortname = 'editingteacher' OR r.shortname = 'manager')";
+
+$courses = $DB->get_records_sql($query, array($USER->id));
+//echo '<pre>';
+//var_dump($courses);
+//echo '</pre>';
 
 echo $OUTPUT->header();
 echo('<h2>Crea un nuovo corso</h2><br><div>');
-$form = new mainchoiceform(); //puoi passare l'action del form come parametro in costruzione.ai
-if ($fromform = $form->get_data()) {
-    // This branch is where you process validated data.
-    // Do stuff ...
 
-    // Typically you finish up by redirecting to somewhere where the user
-    // can see what they did.
-    redirect($nexturl);
-}
+
+$form = new NuovoForm();
+$form->display();
 ?>
 
 
