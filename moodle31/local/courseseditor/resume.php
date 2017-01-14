@@ -19,16 +19,17 @@ $form = new FormClona(); //puoi passare l'action del form come parametro in cost
 if ($fromform = $form->get_data()) {
     foreach ($fromform as $name => $post) {
         $prefix = substr($name, 0, 4);
-        $id = substr($name, strpos($name, "-") + 1);
         if ($prefix == 'name') {
-            var_dump($id . ' ' . 'checked');
-            var_dump(json_decode($post));
+            $id = substr($name, strpos($name, "-") + 1);
+            $datasel = 'data-'.$id;
+            $data = json_decode($fromform->$datasel);
+            //var_dump($data);
         }
-
     }
 
 
 }
+//$form->display();
 ?>
 
 

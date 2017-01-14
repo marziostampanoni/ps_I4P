@@ -20,7 +20,6 @@ echo('<h2>'.get_string('clone_page_title','local_courseseditor').'</h2><br><div>
 
 $form = new FormClona(new moodle_url($CFG->wwwroot . '/local/courseseditor/resume.php'));
 if ($fromform = $form->get_data()) {
-    var_dump($fromform);
     //redirect($nexturl);
 }
 
