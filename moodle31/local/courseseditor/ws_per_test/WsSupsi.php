@@ -6,10 +6,12 @@
  * Date: 14.01.17
  * Time: 11:09
  */
+
+require_once('Ws.php');
 class WsSupsi implements Ws
 {
     var $data = array(
-        array('titolo' => 'Dinamica e stabilità', 'modulo' => 'Modellistica e simulazione', 'dipartimento' => 'DTI', 'corso_laurea' => 'Ingegneria informatica','docenti' =>array('admin','teacher')),
+        array('titolo' => 'Dinamica e stabilita', 'modulo' => 'Modellistica e simulazione', 'dipartimento' => 'DTI', 'corso_laurea' => 'Ingegneria informatica','docenti' =>array('admin','teacher')),
         array('titolo' => 'Sistemi dinamici discreti', 'modulo' => 'Modellistica e simulazione', 'dipartimento' => 'DTI', 'corso_laurea' =>'Ingegneria informatica','docenti' =>array('admin','teacher')),
         array('titolo' => 'Laboratorio di modellistica ', 'modulo' => 'Modellistica e simulazione', 'dipartimento' => 'DTI', 'corso_laurea' =>'Ingegneria informatica','docenti' =>array('admin','teacher')),
         array('titolo' => 'Algoritmi avanzati', 'modulo' => 'Algoritmi avanzati e ottimizzazione', 'dipartimento' => 'DTI', 'corso_laurea' =>'Ingegneria informatica','docenti' =>array('teacher2','teacher')),
@@ -18,6 +20,13 @@ class WsSupsi implements Ws
         array('titolo' => 'Sistemi di gestione dei dati', 'modulo' => 'Sistemi operativi e di gestione dei dati', 'dipartimento' => 'DTI', 'corso_laurea' =>'Ingegneria informatica','docenti' =>array('admin','teacher')),
         array('titolo' => 'Architetture dei computer', 'modulo' => 'Architetture dei computer', 'dipartimento' => 'DTI', 'corso_laurea' =>'Ingegneria informatica','docenti' =>array('admin','teacher2'))
     );
+
+    public function getCorsi()
+    {
+        //var_dump($this->data);
+        return $this->data;
+    }
+
     public function getCorsiPerId($netId)
     {
         $corsi_trovati = array();

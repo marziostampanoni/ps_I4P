@@ -7,10 +7,15 @@
  */
 
 
+require_once('WsUsi.php');
 $ws = new WsUsi();
 
-if($_GET['netid'] && $_GET['netid']!='') echo json_encode($ws->getCorsiPerId($_GET['netid']));
+if($_GET['netid'] && $_GET['netid']!='') $json= json_encode($ws->getCorsiPerId($_GET['netid']));
 
-if($_GET['string'] && $_GET['string']!='') echo json_encode($ws->getCorsiPerStringa($_GET['string']));
-
+elseif($_GET['string'] && $_GET['string']!='') $json= json_encode($ws->getCorsiPerStringa($_GET['string']));
+else {
+    $json=json_encode($ws->getCorsi());
+}
+if(!json_last_error()) echo $json;
+else echo "JSON ERROR! ".json_last_error();
 exit;

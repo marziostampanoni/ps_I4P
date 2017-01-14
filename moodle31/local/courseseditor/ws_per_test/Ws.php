@@ -8,6 +8,7 @@
  */
 interface Ws
 {
+    public function getCorsi();
     public function getCorsiPerId($netID);
     public function getCorsiPerStringa($string);
 }
