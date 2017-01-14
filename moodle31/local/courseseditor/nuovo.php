@@ -12,21 +12,6 @@ $PAGE->set_title("Course Creator");
 $PAGE->set_heading("Course Creator");
 require_login();
 
-//$courses = get_courses();
-$query="
-SELECT *  FROM
-mdl_user u
-JOIN mdl_role_assignments ra ON ra.userid = u.id
-JOIN mdl_role r ON ra.roleid = r.id
-JOIN mdl_context con ON ra.contextid = con.id
-JOIN mdl_course c ON c.id = con.instanceid AND con.contextlevel = 50
-WHERE u.id=? AND (r.shortname = 'teacher' OR r.shortname = 'editingteacher' OR r.shortname = 'manager')";
-
-$courses = $DB->get_records_sql($query, array($USER->id));
-//echo '<pre>';
-//var_dump($courses);
-//echo '</pre>';
-
 echo $OUTPUT->header();
 echo('<h2>Crea un nuovo corso</h2><br><div>');
 
