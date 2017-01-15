@@ -3,7 +3,7 @@
 
 require_once("$CFG->libdir/formslib.php");
 
-class FormClona extends moodleform
+class FormCancella extends moodleform
 {
     protected function definition()
     {
@@ -20,7 +20,7 @@ WHERE u.id=? AND (r.shortname = 'teacher' OR r.shortname = 'editingteacher' OR r
 
         $courses = $DB->get_records_sql($query, array($USER->id));
         $form = $this->_form;
-
+        $form->disable_form_change_checker();
         $eachCat = coursecat::make_categories_list();
         foreach ($eachCat as $id => $cat) {
             $countcourses = coursecat::get($id)->get_courses_count();
@@ -53,17 +53,15 @@ WHERE u.id=? AND (r.shortname = 'teacher' OR r.shortname = 'editingteacher' OR r
                             $teachers[] = array('id' => $teacher->id, 'name' => $teacher->lastname . ' ' . $teacher->firstname);
                         }
 
-                        $form->addElement('checkbox', 'name-' . $corso->instanceid, '', $details, array('value' => 'asd'), array('value' => 'asd'));
+                        $form->addElement('checkbox', 'name-' . $corso->instanceid, '', $details);
                         $data = array('id' => $corso->instanceid, 'title' => $corso->fullname, 'cat' => $cat, 'teachers' => $teachers, 'editingteacher' => $editingteachers);
                         $form->addElement('hidden', 'data-' . $corso->instanceid, json_encode($data));
 
                     }
                 }
             }
-
         }
-
         $form->addElement('html', '<br>');
-        $form->addElement('submit', 'next', get_string("clone_next", 'local_courseseditor'));
+        $form->addElement('button', 'next', get_string("delete_next", 'local_courseseditor'), array('data-toggle' => 'modal', 'data-target' => '#deleteModal'));
     }
 }
