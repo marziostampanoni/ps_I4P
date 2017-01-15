@@ -21,31 +21,29 @@ class WsSupsi implements Ws
         array('titolo' => 'Architetture dei computer', 'modulo' => 'Architetture dei computer', 'dipartimento' => 'DTI', 'corso_laurea' =>'Ingegneria informatica','docenti' =>array('admin','teacher2'))
     );
 
-    public function getCorsi()
+    public function getCorsi($netId=null,$string=null)
     {
-        //var_dump($this->data);
-        return $this->data;
-    }
+        $corsi_trovati=$this->data;
+        $base_ricerca = $this->data;
+        if($netId){
+            $corsi_trovati = array();
+            foreach ($base_ricerca as $corso){
+                if(in_array($netId,$corso['docenti'])){
+                    $corsi_trovati[]= $corso;
+                }
+            }
+            $base_ricerca=$corsi_trovati;
+        }
 
-    public function getCorsiPerId($netId)
-    {
-        $corsi_trovati = array();
-        foreach ($this->data as $corso){
-            if(in_array($netId,$corso['docenti'])){
-                $corsi_trovati[]= $corso;
+        if($string){
+            $corsi_trovati = array();
+            foreach ($base_ricerca as $corso){
+                if(stristr($corso['titolo'],$string)){
+                    $corsi_trovati[]= $corso;
+                }
             }
         }
-        return $corsi_trovati;
-    }
 
-    public function getCorsiPerStringa($string)
-    {
-        $corsi_trovati = array();
-        foreach ($this->data as $corso){
-            if(strstr($corso['titolo'],$string)){
-                $corsi_trovati[]= $corso;
-            }
-        }
         return $corsi_trovati;
     }
 

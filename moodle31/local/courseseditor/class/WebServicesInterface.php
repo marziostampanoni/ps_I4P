@@ -22,5 +22,5 @@ interface WebServicesInterface{
     /** Ritorna tutti i corsi
      * @return array
      */
-    function getCorsi();
+    function getCorsi($netId=null,$string=null);
 }

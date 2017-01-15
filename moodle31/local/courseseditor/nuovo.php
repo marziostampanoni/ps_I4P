@@ -1,6 +1,8 @@
 <?php
 require_once('../../config.php');
 require_once('form/nuovo.php');
+require_once('form/cercacorsiws.php');
+require_once('form/selectcorsi.php');
 require_once('class/SupsiWebServices.php');
 require_once('class/UsiWebServices.php');
 require_once('class/Richiesta.php');
@@ -16,25 +18,49 @@ $PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/courseseditor/js/mai
 require_login();
 
 echo $OUTPUT->header();
-echo('<h2>Crea un nuovo corso</h2><br><div>');
+echo('<h2>Crea un nuovo corso</h2>');
 
 
 if($_GET['user_type']=='usi') $ws = new UsiWebServices();
 else $ws = new SupsiWebServices();
 
-$result=$ws->getCorsiPerNetID($USER->username);
+$filter_cerca=null;
+$filter_netID=null;
+$form = new FormCercaCorsiWs();
+$form->display();
+
+if ($fromform = $form->get_data()) {
+    if($fromform->string!='') $filter_cerca = $fromform->string;
+    if($fromform->onlythis==1) $filter_netID = $USER->username;
+    if($fromform->submitsupsi) $ws = new SupsiWebServices();
+    if($fromform->submitusi) $ws = new UsiWebServices();
+}
+
+$result = $ws->getCorsi($filter_netID,$filter_cerca);
+
+$form = new FormSelectCorsi(NULL,array('corsi'=>$result));
+
+if ($fromform = $form->get_data()) {
+    var_dump($fromform);
+
+
+
+}
+
+echo '<h4>'. get_string('Seleziona corsi','local_courseseditor').'</h4>';
+
+$form->display();
 
 $form = new FormNuovo(NULL,array('corsi'=>$result));
 
 if ($fromform = $form->get_data()) {
     var_dump($fromform);
+
 }
 
+echo '<h4>'. get_string('Aggiungi corso','local_courseseditor').'</h4>';
+
 $form->display();
-?>
 
-
-<?php
-echo('</div>');
 echo $OUTPUT->footer();
 ?>

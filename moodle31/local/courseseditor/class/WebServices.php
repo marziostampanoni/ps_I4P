@@ -23,8 +23,11 @@ abstract class WebServices implements WebServicesInterface
         return $this->executeCurl();
     }
 
-    function getCorsi()
+    function getCorsi($netId=null,$string=null)
     {
+        if($netId) $param[]="netid=$netId";
+        if($string) $param[]="string=$string";
+        if($param)$this->url .= "?".implode('&',$param);
         return $this->executeCurl();
     }
 
@@ -36,6 +39,9 @@ abstract class WebServices implements WebServicesInterface
         curl_setopt($ch, CURLOPT_URL,$this->url);
         $result=curl_exec($ch);
         curl_close($ch);
-        return json_decode($result);
+        $res=json_decode($result);
+        if(!json_last_error()) return $res;
+        else return "JSON ERROR! ".json_last_error();
+
     }
 }
