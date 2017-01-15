@@ -1,11 +1,10 @@
 <?php
-
-
-// The number of lines in front of config file determine the // hierarchy of files.
 require_once('../../config.php');
 require_once('form/nuovo.php');
 require_once('class/SupsiWebServices.php');
 require_once('class/UsiWebServices.php');
+require_once('class/Richiesta.php');
+require_once('class/Corso.php');
 
 
 $PAGE->set_context(get_system_context());
@@ -18,6 +17,16 @@ require_login();
 
 echo $OUTPUT->header();
 echo('<h2>Crea un nuovo corso</h2><br><div>');
+
+$r = new Richiesta();
+$r->setId(3);
+$r->loadFromDB();
+
+$c = new Corso();
+$c->setId(2);
+$c->loadFromDB();
+
+var_dump($r,$c);
 
 if($_GET['user_type']=='usi') $ws = new UsiWebServices();
 else $ws = new SupsiWebServices();
