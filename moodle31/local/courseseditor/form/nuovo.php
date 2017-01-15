@@ -13,16 +13,11 @@ class FormNuovo extends moodleform
 {
     protected function definition()
     {
-        global $USER;
-        global $USER;
         $form = $this->_form;
-        $buttonarray=array();
-        $buttonarray[]=&$form->createElement('text', 'string','sasa',array('placeholder'=>get_string('String di ricerca','local_courseseditor')));
-        $buttonarray[]=&$form->createElement('checkbox', 'onlythis', '',get_string('Solo corsi di','local_courseseditor').' '.$USER->username,array('class'=>'form-check-input','type'=>'checkbox'));
-        $buttonarray[] = &$form->createElement('submit', 'submitusi', get_string('search').' in USI');
-        $buttonarray[] = &$form->createElement('submit', 'submitsupsi', get_string('search').' in SUPSI');
-        $form->addGroup($buttonarray, 'buttonar', '', array(' '), false);
-        $form->closeHeaderBefore('buttonar');
-        $form->addElement('submit', 'sbmt', "Next", array('style' => 'width:50px;'));
+        $form->addElement('text', 'titolo','Titolo corso',array('placeholder'=>get_string('titolo','local_courseseditor')));
+        $form->addElement('text', 'codice','',array('placeholder'=>get_string('codice','local_courseseditor')));
+        $eachCat = coursecat::make_categories_list();
+        $form->addElement('select','categoria',get_string('category'),$eachCat);
+        $form->addElement('submit', 'sbmt',get_string('Aggiungi','local_courseseditor') , array('class' => 'btn btn-primary'));
     }
 }

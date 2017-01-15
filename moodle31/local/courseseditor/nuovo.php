@@ -59,7 +59,7 @@ if ($fromform = $form->get_data()) {
 }
 
 echo '<h4>'. get_string('Aggiungi corso','local_courseseditor').'</h4>';
-
+echo "<p>Crea un corso che non esiste nei database ufficiale dei corsi USI/SUPSI</p>";
 $form->display();
 
 echo $OUTPUT->footer();
