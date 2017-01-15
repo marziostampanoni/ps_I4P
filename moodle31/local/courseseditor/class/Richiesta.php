@@ -49,7 +49,6 @@ class Richiesta
                 $corsi = $DB->get_records('lcl_courseseditor_corso', array('id_lcl_courseseditor_richiesta'=>$this->id));
 
                 foreach ($corsi as $corso){
-                    $arr_c = get_object_vars($corso);
                     $c = new Corso();
                     $c->setId($corso->id);
                     $c->loadFromDB();

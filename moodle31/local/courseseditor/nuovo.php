@@ -18,26 +18,16 @@ require_login();
 echo $OUTPUT->header();
 echo('<h2>Crea un nuovo corso</h2><br><div>');
 
-$r = new Richiesta(3);
-//$r->setId(3);
-$r->loadFromDB();
-
-$c = new Corso(2);
-//$c->setId(2);
-$c->loadFromDB();
-
-var_dump($r,$c);
 
 if($_GET['user_type']=='usi') $ws = new UsiWebServices();
 else $ws = new SupsiWebServices();
 
-$result=$ws->getCorsi();
+$result=$ws->getCorsiPerNetID($USER->username);
 
 $form = new FormNuovo(NULL,array('corsi'=>$result));
 
 if ($fromform = $form->get_data()) {
     var_dump($fromform);
-    //redirect($nexturl);
 }
 
 $form->display();

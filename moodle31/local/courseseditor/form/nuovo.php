@@ -13,27 +13,55 @@ class FormNuovo extends moodleform
 {
     protected function definition()
     {
-        global $USER,$DB;
-
+        global $USER;
         $form = $this->_form;
-
+        $i=0;
         foreach ($this->_customdata['corsi'] as $corso) {
-            $details = '<b>' . $corso->titolo . ', '.$corso->facolta .', '.$corso->corso_laurea. ', Ruolo: ' . implode(',',$corso->docenti);
-            $form->addElement('checkbox', 'name-' . $corso->instanceid, '', $details, array('value' => 'asd'), array('value' => 'asd'));
+            $arr_c = get_object_vars($corso);
+            $ruoli=null;
+            foreach($arr_c as $param => $valore){
+                switch ($param){
+                    case 'titolo':
+                        $titolo= "$valore";
+                            break;
+                    case 'facolta':
+                        $facolta= ", $valore";
+                        break;
+                    case 'corso_laurea':
+                        $cdl= ", $valore";
+                        break;
+                    case 'modulo':
+                        $modulo= ", $valore";
+                        break;
+                    case 'dipartimento':
+                        $dip= ", $valore";
+                        break;
+                    case 'docenti':
+                        foreach ($valore as $docente){
+                            if($docente==$USER->username)$ruoli[]=TIPO_RELAZIONE_DOCENTE;
+                            break;
+                        }
+                        break;
+                    case 'assistenti':
+                        foreach ($valore as $docente){
+                            if($docente==$USER->username)$ruoli[]=TIPO_RELAZIONE_ASSISTENTE;
+                            break;
+                        }
+                        break;
+                }
+            }
+            $details = "<b> $titolo</b>$facolta$cdl$modulo$dip".($ruoli? ', Ruolo: '. implode(',',$ruoli):'');
+
+            $form->addElement('checkbox', 'name-' . $i, '', $details, array('value' => 'asd'), array('value' => 'asdfghj'));
             $data = array('id' => null,
                 'title' => $corso->titolo,
-                'cat' => $corso->facolta,
-                'teachers' => array(array('id' => 'id_teacher1', 'name' => 'name_teacher1TODO'), array('id' => 'id_teacher2', 'name' => 'name_teacher2TODO')), 'editingteacher' => array(array('id' => 'id_editingteacher1', 'name' => 'name_editingteacher1TODO'), array('id' => 'id_editingteacher2', 'name' => 'name_editingteacher2TODO')));
-            $form->addElement('hidden', 'data-' . $corso->instanceid, json_encode($data));
+                'cat' => null,
+                'teachers' => null,
+                'editingteacher' => null
+            );
+            $form->addElement('hidden', 'data-' . $i, json_encode($data));
+            $i++;
         }
-
-
-        $statesArray=array();
-        foreach ($this->_customdata['corsi'] as $corso){
-            $statesArray[]=$corso->titolo.', '.$corso->facolta.', '.$corso->corso_laurea.' Ruolo :'.implode(',',$corso->docenti);
-        }
-        $select = $form->addElement('select', 'corsi', get_string('Corsi'), $statesArray);
-        $select->setMultiple(true);
 
         $form->addElement('submit', 'sbmt', "Next", array('style' => 'width:50px;'));
     }
