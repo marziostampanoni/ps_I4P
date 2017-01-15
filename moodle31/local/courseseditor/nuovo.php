@@ -4,6 +4,8 @@
 // The number of lines in front of config file determine the // hierarchy of files.
 require_once('../../config.php');
 require_once('form/nuovo.php');
+require_once('class/SupsiWebServices.php');
+require_once('class/UsiWebServices.php');
 
 
 $PAGE->set_context(get_system_context());
@@ -15,25 +17,10 @@ require_login();
 echo $OUTPUT->header();
 echo('<h2>Crea un nuovo corso</h2><br><div>');
 
-if($_GET['user_type']=='usi') $url = get_config('local_courseseditor','usi_host');
-else $url = get_config('local_courseseditor','supsi_host');
+if($_GET['user_type']=='usi') $ws = new UsiWebServices();
+else $ws = new SupsiWebServices();
 
-//  Initiate curl
-$ch = curl_init();
-// Disable SSL verification
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-// Will return the response, if false it print the response
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// Set the url
-curl_setopt($ch, CURLOPT_URL,$url);
-// Execute
-$result=curl_exec($ch);
-// Closing
-curl_close($ch);
-
-// Will dump a beauty json :3
-
-$result=json_decode($result);
+$result=$ws->getCorsi();
 
 $form = new FormNuovo(NULL,array('corsi'=>$result));
 
