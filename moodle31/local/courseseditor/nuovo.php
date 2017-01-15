@@ -41,9 +41,20 @@ $result = $ws->getCorsi($filter_netID,$filter_cerca);
 $form = new FormSelectCorsi(NULL,array('corsi'=>$result));
 
 if ($fromform = $form->get_data()) {
-    var_dump($fromform);
 
+    $selezionati=array();
+    foreach ($fromform as $name=>$item){
 
+        if(substr($name,0,4)=='name'){
+            $selezionati[]=substr($name,5);
+
+            echo " <br> ".substr($name,5);
+        }
+    }
+    foreach ($selezionati as $num){
+        $param="data-$num";
+        echo " <br> ".var_dump($fromform->$param);
+    }
 
 }
 

@@ -14,10 +14,11 @@ class FormNuovo extends moodleform
     protected function definition()
     {
         $form = $this->_form;
-        $form->addElement('text', 'titolo','Titolo corso',array('placeholder'=>get_string('titolo','local_courseseditor')));
-        $form->addElement('text', 'codice','',array('placeholder'=>get_string('codice','local_courseseditor')));
+        //$form->setAttributes(array('class' => 'form-inline'));
+        $form->addElement('text', 'titolo',get_string('Titolo','local_courseseditor'),array('placeholder'=>get_string('titolo','local_courseseditor')));
+        $form->addElement('text', 'codice',get_string('Codice','local_courseseditor'),array('placeholder'=>get_string('codice','local_courseseditor')));
         $eachCat = coursecat::make_categories_list();
-        $form->addElement('select','categoria',get_string('category'),$eachCat);
+        $form->addElement('select','categoria',get_string('category'),$eachCat,array('class' => 'inline'));
         $form->addElement('submit', 'sbmt',get_string('Aggiungi','local_courseseditor') , array('class' => 'btn btn-primary'));
     }
 }
