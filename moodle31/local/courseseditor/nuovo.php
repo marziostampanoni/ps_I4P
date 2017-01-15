@@ -12,6 +12,8 @@ $PAGE->set_context(get_system_context());
 $PAGE->set_pagelayout('admin');
 $PAGE->set_title("Course Creator");
 $PAGE->set_heading("Course Creator");
+$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/courseseditor/js/main.js'));
+
 require_login();
 
 echo $OUTPUT->header();
@@ -37,11 +39,3 @@ $form->display();
 echo('</div>');
 echo $OUTPUT->footer();
 ?>
-
-<script>
-    function updateURL(a){
-        var form = document.getElementById('mform1');
-        form.setAttribute('action', 'http://localhost:8888/moodle31/local/courseseditor/'+a+'.php');
-        form.submit();
-    }
-</script>
