@@ -25,7 +25,9 @@ class Corso
     var $note;
     var $tipo_richiesta;
     var $stato_richiesta;
-
+    /**
+     * @var UserCorso[]
+     */
     var $user_assegnati;
 
     function __construct($id=null)
@@ -59,7 +61,45 @@ class Corso
             }
         }else return false;
     }
+    /**
+     * Salva su DB il corso
+     */
+    public function saveToDB()
+    {
+        global $DB;
+        $r = new stdClass();
+        $r->id_lcl_courseseditor_richiesta=$this->id_lcl_courseseditor_richiesta;
+        $r->titolo=$this->titolo;
+        $r->shortname=$this->shortname;
+        $r->id_mdl_course_categories=$this->id_mdl_course_categories;
+        $r->note=$this->note;
+        $r->tipo_richiesta=$this->tipo_richiesta;
 
+        if($this->id>0){// update
+            $r->id==$this->id;
+            $r->stato_richiesta=$this->stato_richiesta;
+            if($DB->update_record('lcl_courseseditor_corso', $r, false)){
+                foreach ($this->user_assegnati as $user) {
+                    $user->saveToDB();
+                }
+            }
+        }else{// insert
+            // inserisco solo se almeno un user assegnato e c'è la relazione con la richiesta
+            if (count($this->user_assegnati) > 0 && $this->id_lcl_courseseditor_richiesta>0) {
+
+                $r->stato_richiesta = STATO_RICHIESTA_DA_GESTIRE;
+                $lastinsertid = $DB->insert_record('lcl_courseseditor_corso', $r, false);
+
+                if ($lastinsertid) {// se inserimento andato bene allora inserisco i corsi
+                    foreach ($this->user_assegnati as $user) {
+                        $user->setIdLclCourseseditorCorso($lastinsertid);
+                        $user->saveToDB();
+                    }
+                }
+                return true;
+            }else return false;
+        }
+    }
     /**
      * @param UserCorso $user
      */

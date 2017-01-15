@@ -21,10 +21,14 @@ class Richiesta
      */
     var $data_richiesta;
     /**
-     * @var Array con gli oggetti Corso che fanno parte di questa richiesta
+     * @var Corso[] con gli oggetti Corso che fanno parte di questa richiesta
      */
     var $corsi_richiesti;
 
+    /**
+     * Richiesta constructor.
+     * @param null $id
+     */
     function __construct($id=null)
     {
         $this->id=$id;
@@ -56,8 +60,36 @@ class Richiesta
         }else return false;
     }
 
-    public function saveToDB(){
+    /**
+     * Salva su DB la richiesta
+     */
+    public function saveToDB()
+    {
+        global $DB;
+        if (count($this->corsi_richiesti) > 0) {// inserisco solo se almeno un corso richiesto
+            $r = new stdClass();
+            $r->id_mdl_user = $this->id_mdl_user;
+            $r->data_richiesta = time();
 
+            if($this->id>0){// update
+                $r->id==$this->id;
+                if($DB->update_record('lcl_courseseditor_corso', $r, false)){
+                    foreach ($this->corsi_richiesti as $corso) {
+                        $corso->saveToDB();
+                    }
+                }
+            }else {
+                // inserisco la richiesta
+                $lastinsertid = $DB->insert_record('lcl_courseseditor_richiesta', $r, false);
+
+                if ($lastinsertid) {// se inserimento andato bene allora inserisco i corsi
+                    foreach ($this->corsi_richiesti as $corso) {
+                        $corso->setIdLclCourseseditorRichiesta($lastinsertid);
+                        $corso->saveToDB();
+                    }
+                }
+            }
+        } else return false;
     }
 
     /**

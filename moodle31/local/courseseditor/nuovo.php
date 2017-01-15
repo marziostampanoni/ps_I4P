@@ -18,12 +18,12 @@ require_login();
 echo $OUTPUT->header();
 echo('<h2>Crea un nuovo corso</h2><br><div>');
 
-$r = new Richiesta();
-$r->setId(3);
+$r = new Richiesta(3);
+//$r->setId(3);
 $r->loadFromDB();
 
-$c = new Corso();
-$c->setId(2);
+$c = new Corso(2);
+//$c->setId(2);
 $c->loadFromDB();
 
 var_dump($r,$c);
