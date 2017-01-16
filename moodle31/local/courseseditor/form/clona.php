@@ -65,5 +65,7 @@ WHERE u.id=? AND (r.shortname = 'teacher' OR r.shortname = 'editingteacher' OR r
 
         $form->addElement('html', '<br>');
         $form->addElement('submit', 'next', get_string("clone_next", 'local_courseseditor'));
+        $form->closeHeaderBefore('next');
+
     }
 }

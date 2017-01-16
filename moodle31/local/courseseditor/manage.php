@@ -3,32 +3,34 @@
 
 // The number of lines in front of config file determine the // hierarchy of files.
 require_once('../../config.php');
-require_once('mainchoiceform.php');
+require_once('form/manage.php');
 
 
-$PAGE->set_context(get_system_context());
 $PAGE->set_pagelayout('admin');
-$PAGE->set_title("Course manager");
-$PAGE->set_heading("Course manager");
-//$PAGE->set_url($CFG->wwwroot.'/local/courseseditor/manage.php');
+$PAGE->set_title(get_string('pluginname', 'local_courseseditor'));
+$PAGE->set_heading(get_string('heading', 'local_courseseditor'));
+$PAGE->requires->js(new moodle_url($CFG->wwwroot . '/local/courseseditor/js/main.js'));
 require_login();
 
-if(!has_capability('local/courseseditor:manage',context_user::instance($USER->id),$USER->id,TRUE)){
-    echo "Non hai i diritti per vedere questa pagina";
-    return;
-}
-
 echo $OUTPUT->header();
-echo('<h2>Manage requests</h2><br><div>');
-$form = new mainchoiceform(); //puoi passare l'action del form come parametro in costruzione.ai
-if ($fromform = $form->get_data()) {
-    // This branch is where you process validated data.
-    // Do stuff ...
-
-    // Typically you finish up by redirecting to somewhere where the user
-    // can see what they did.
-    redirect($nexturl);
+echo('<h2>' . get_string('manage_page_title', 'local_courseseditor') . '</h2><br><div>');
+if (isset($_GET['cancel']) && $_GET['cancel'] > 0) {
+    $corso = new Corso(substr($_GET['cancel'], strpos($_GET['cancel'], "_") + 1));
+    $corso->loadFromDB();
+    $corso->stato_richiesta = STATO_RICHIESTA_SOSPESO;
+    $corso->saveToDB();
 }
+if (isset($_GET['save']) && $_GET['save'] > 0) {
+    $courses = array();
+    foreach (explode('_', $_GET['save']) as $item) {
+        $corso = new Corso($item);
+        $corso->loadFromDB();
+        $corso->setStatoRichiesta(STATO_RICHIESTA_FATTO);
+        $corso->saveToDB();
+    }
+}
+$form = new FormManage();
+$form->display();
 ?>
 
 
@@ -38,9 +40,19 @@ echo $OUTPUT->footer();
 ?>
 
 <script>
-    function updateURL(a){
+    function saveUserRequests(idReq) {
         var form = document.getElementById('mform1');
-        form.setAttribute('action', 'http://localhost:8888/moodle31/local/courseseditor/'+a+'.php');
+        form.action += '?save=' + idReq;
+        console.log(form.action);
+        form.submit();
+    }
+    function cancelCourse(idReq, idCourse) {
+        var form = document.getElementById('mform1');
+        var req = '?cancel=' + idReq;
+        var action = req.concat('_') + idCourse;
+        form.action += action;
+        console.log(action);
         form.submit();
     }
 </script>
+

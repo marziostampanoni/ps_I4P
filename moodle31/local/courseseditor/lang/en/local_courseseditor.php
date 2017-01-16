@@ -1,13 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Rezart Lohja
- * Date: 12.01.17
- * Time: 19:33
- */
 
 $string['pluginname'] = 'Courses editor';
 $string['pluginname_desc'] = 'This plugin ...';
+
+$string['editingteacher'] = 'Teacher';
+$string['teacher'] = 'Assistant';
 
 $string['start_page_title'] = 'Prepare your request:';
 $string['heading'] = 'Courses manager';
@@ -26,10 +23,21 @@ $string['resume_tablehead_cat'] = 'Category';
 $string['resume_tablehead_teacher'] = 'Assistant';
 $string['resume_tablehead_editingteacher'] = 'Teacher';
 $string['resume_tablehead_note'] = 'Note';
-$string['resume_next'] = 'Save';
 $string['resume_comments'] = 'Comments';
 $string['resume_comment_placeholder'] = 'Add comment to your submission..';
 $string['resume_next'] = 'Submit request';
+$string['resume_tablehead_actions'] = 'Action';
+
+$string['manage_page_title'] = 'Manage requests:';
+$string['manage_tablehead_shortname'] = 'Shortname';
+$string['manage_tablehead_actions'] = 'Actions';
+$string['manage_noentry'] = 'There are no pending requests';
+$string['manage_btn_confirm'] = 'Confirm and delete';
+$string['manage_request_user'] = 'Submitted by';
+$string['manage_save_course'] = 'Save Request';
+$string['manage_cancel_course'] = 'Cancel course';
+
+
 
 $string['delete_page_title'] = 'Delete existing courses:';
 $string['delete_next'] = 'Delete';

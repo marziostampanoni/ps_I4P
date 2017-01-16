@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Rezart Lohja
- * Date: 15.01.17
- * Time: 11:07
- */
 define("TIPO_RELAZIONE_DOCENTE", "Docente");
 define("TIPO_RELAZIONE_ASSISTENTE", "Assistente");
 
@@ -32,11 +26,11 @@ class UserCorso
         $r->id_mdl_user=$this->id_mdl_user;
 
         if($this->id>0){// update
-            $r->id==$this->id;
+            $r->id=$this->id;
             $DB->update_record('lcl_courseseditor_corso_user', $r, false);
         }else{// insert
-            if ($this->id_lcl_courseseditor_corso > 0) {// inserisco solo se il corso è stato assegnto
-               return $DB->insert_record('lcl_courseseditor_corso_user', $r, false);
+            if ($this->id_lcl_courseseditor_corso > 0) {// inserisco solo se il corso ï¿½ stato assegnto
+               $DB->insert_record('lcl_courseseditor_corso_user', $r, false);
             }else return false;
         }
     }

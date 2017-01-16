@@ -88,4 +88,3 @@ if ($fromform = $resumeForm->get_data()) {
 echo('</div>');
 echo $OUTPUT->footer();
 ?>
-

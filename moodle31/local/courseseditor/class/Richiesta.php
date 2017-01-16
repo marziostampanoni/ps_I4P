@@ -71,7 +71,7 @@ class Richiesta
             $r->data_richiesta = time();
 
             if($this->id>0){// update
-                $r->id==$this->id;
+                $r->id=$this->id;
                 if($DB->update_record('lcl_courseseditor_corso', $r, false)){
                     foreach ($this->corsi_richiesti as $corso) {
                         $corso->saveToDB();
@@ -80,10 +80,8 @@ class Richiesta
             }else {
                 // inserisco la richiesta
                 $lastinsertid = $DB->insert_record('lcl_courseseditor_richiesta', $r, true);
-
                 if ($lastinsertid) {// se inserimento andato bene allora inserisco i corsi
                     foreach ($this->corsi_richiesti as $corso) {
-
                         $corso->setIdLclCourseseditorRichiesta($lastinsertid);
                         $corso->saveToDB();
                     }

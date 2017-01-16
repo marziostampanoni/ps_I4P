@@ -30,7 +30,7 @@ class Corso
      */
     var $user_assegnati;
 
-    function __construct($id=null)
+    function __construct($id=-1)
     {
         $this->id=$id;
     }
@@ -76,7 +76,7 @@ class Corso
         $r->tipo_richiesta=$this->tipo_richiesta;
 
         if($this->id>0){// update
-            $r->id==$this->id;
+            $r->id=$this->id;
             $r->stato_richiesta=$this->stato_richiesta;
             if($DB->update_record('lcl_courseseditor_corso', $r, false)){
                 foreach ($this->user_assegnati as $user) {
@@ -84,13 +84,12 @@ class Corso
                 }
             }
         }else{// insert
-            // inserisco solo se almeno un user assegnato e c'è la relazione con la richiesta
+            // inserisco solo se almeno un user assegnato e c'ï¿½ la relazione con la richiesta
             if (count($this->user_assegnati) > 0 && $this->id_lcl_courseseditor_richiesta>0) {
 
                 $r->stato_richiesta = STATO_RICHIESTA_DA_GESTIRE;
-
                 $lastinsertid = $DB->insert_record('lcl_courseseditor_corso', $r, true);
-                echo $DB->get_last_error();
+
                 if ($lastinsertid) {// se inserimento andato bene allora inserisco i corsi
                     foreach ($this->user_assegnati as $user) {
                         $user->setIdLclCourseseditorCorso($lastinsertid);
