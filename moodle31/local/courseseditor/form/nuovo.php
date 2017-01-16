@@ -14,7 +14,7 @@ class FormNuovo extends moodleform
     protected function definition()
     {
         $form = $this->_form;
-        //$form->setAttributes(array('class' => 'form-inline'));
+        $form->setAttributes(array('id' => 'form-nuovo'));
         $form->addElement('text', 'titolo',get_string('Titolo','local_courseseditor'),array('placeholder'=>get_string('titolo','local_courseseditor')));
         $form->addElement('text', 'codice',get_string('Codice','local_courseseditor'),array('placeholder'=>get_string('codice','local_courseseditor')));
         $eachCat = coursecat::make_categories_list();
@@ -22,7 +22,7 @@ class FormNuovo extends moodleform
 
         $buttonarray=array();
         $buttonarray[] = &$form->createElement('submit', 'add', get_string('Aggiungi','local_courseseditor'));
-        $buttonarray[] = &$form->createElement('button', 'done', get_string('Avanti','local_courseseditor'), array('style' => 'width:200px;', 'onClick' => 'updateURL(\'resume\');'));
+        $buttonarray[] = &$form->createElement('button', 'done', get_string('Avanti','local_courseseditor'), array('style' => 'width:200px;', 'onClick' => 'updateURL(\'resume\',\'form-nuovo\');'));
         $form->addGroup($buttonarray, 'buttonar', '', array(' '), false);
         $form->closeHeaderBefore('buttonar');
     }

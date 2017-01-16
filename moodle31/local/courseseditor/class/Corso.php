@@ -88,8 +88,9 @@ class Corso
             if (count($this->user_assegnati) > 0 && $this->id_lcl_courseseditor_richiesta>0) {
 
                 $r->stato_richiesta = STATO_RICHIESTA_DA_GESTIRE;
-                $lastinsertid = $DB->insert_record('lcl_courseseditor_corso', $r, false);
 
+                $lastinsertid = $DB->insert_record('lcl_courseseditor_corso', $r, true);
+                echo $DB->get_last_error();
                 if ($lastinsertid) {// se inserimento andato bene allora inserisco i corsi
                     foreach ($this->user_assegnati as $user) {
                         $user->setIdLclCourseseditorCorso($lastinsertid);

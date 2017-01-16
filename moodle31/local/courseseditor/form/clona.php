@@ -54,7 +54,7 @@ WHERE u.id=? AND (r.shortname = 'teacher' OR r.shortname = 'editingteacher' OR r
                         }
 
                         $form->addElement('checkbox', 'name-' . $corso->instanceid, '', $details, array('value' => 'asd'), array('value' => 'asd'));
-                        $data = array('id' => $corso->instanceid, 'title' => $corso->fullname, 'cat' => $cat, 'teachers' => $teachers, 'editingteacher' => $editingteachers);
+                        $data = array('id' => $corso->instanceid, 'title' => $corso->fullname, 'cat' => $id, 'teachers' => $teachers, 'editingteacher' => $editingteachers);
                         $form->addElement('hidden', 'data-' . $corso->instanceid, json_encode($data));
 
                     }
