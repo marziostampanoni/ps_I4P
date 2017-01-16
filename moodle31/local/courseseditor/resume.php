@@ -22,9 +22,11 @@ $cancelForm = new FormCancella();
 
 
 if ($fromform = $form->get_data()) {
-    $resumeForm = new FormResume(null,array('data'=>$fromform));
+    $data = CEUtil::getParsedDataFromForm($fromform);
+    $resumeForm = new FormResume(null,array('data'=>$data));
 } else if($fromform = $cancelForm->get_data()){
-    $resumeForm = new FormResume(null,array('data'=>$fromform));
+    $data = CEUtil::getParsedDataFromForm($fromform);
+    $resumeForm = new FormResume(null,array('data'=>$data));
 } else if($_SESSION['courses_to_insert']){
     $resumeForm = new FormResume(null,array('data'=>$_SESSION['courses_to_insert']));
 }

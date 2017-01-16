@@ -105,7 +105,7 @@ if(!$_SESSION['courses_to_insert']) {
         }
         echo "</ul>";
     }
-
+    $form_add->set_data(array('titolo'=>null,'codice'=>null,'categoria'=>null));
     echo '<h4>' . get_string('Aggiungi corso', 'local_courseseditor') . '</h4>';
     echo "<p>Crea un corso che non esiste nei database ufficiale dei corsi USI/SUPSI</p>";
     $form_add->display();
