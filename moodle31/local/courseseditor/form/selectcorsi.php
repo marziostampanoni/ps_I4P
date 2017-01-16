@@ -54,7 +54,7 @@ class FormSelectCorsi extends moodleform
 
             $form->addElement('checkbox', 'name-' . $i, '', $details, array('value' => 'asd'), array('value' => 'asdfghj'));
             $data = array('id' => null,
-                'title' => $corso->titolo,
+                'title' => "<b> $titolo</b>$facolta$cdl$modulo$dip",
                 'cat' => null,
                 'teachers' => null,
                 'editingteacher' => null
@@ -63,6 +63,6 @@ class FormSelectCorsi extends moodleform
             $i++;
         }
 
-        $form->addElement('submit', 'sbmt', "Next", array('style' => 'width:50px;'));
+        $form->addElement('submit', 'submit_selectcorsi', "Avanti", array('style' => 'width:100px;'));
     }
 }

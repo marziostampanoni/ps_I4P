@@ -20,10 +20,13 @@ echo('<h2>' . get_string('resume_page_title', 'local_courseseditor') . '</h2><br
 $form = new FormClona();
 $cancelForm = new FormCancella();
 
+
 if ($fromform = $form->get_data()) {
     $resumeForm = new FormResume(null,array('data'=>$fromform));
 } else if($fromform = $cancelForm->get_data()){
     $resumeForm = new FormResume(null,array('data'=>$fromform));
+} else if($_SESSION['courses_to_insert']){
+    $resumeForm = new FormResume(null,array('data'=>$_SESSION['courses_to_insert']));
 }
 $resumeForm->display();
 ?>
