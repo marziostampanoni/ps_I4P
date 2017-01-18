@@ -6,7 +6,7 @@ $string['pluginname_desc'] = 'This plugin ...';
 $string['editingteacher'] = 'Teacher';
 $string['teacher'] = 'Assistant';
 
-$string['start_page_title'] = 'Prepare your request:';
+$string['start_page_title'] = 'Prepare your request';
 $string['heading'] = 'Courses manager';
 $string['new_courses'] = 'New courses';
 $string['clone_courses'] = 'Clone courses';
@@ -17,7 +17,7 @@ $string['resume_courses'] = 'Resume';
 $string['clone_page_title'] = 'Clone existing courses:';
 $string['clone_next'] = 'Confirm and continue';
 
-$string['resume_page_title'] = 'Resume:';
+$string['resume_page_title'] = 'Resume';
 $string['resume_tablehead_title'] = 'Title';
 $string['resume_tablehead_cat'] = 'Category';
 $string['resume_tablehead_teacher'] = 'Assistant';
@@ -27,8 +27,11 @@ $string['resume_comments'] = 'Comments';
 $string['resume_comment_placeholder'] = 'Add comment to your submission..';
 $string['resume_next'] = 'Submit request';
 $string['resume_tablehead_actions'] = 'Action';
+$string['resume_page_success'] = '<strong>Success!</strong> Request inserted successfully.';
+$string['resume_page_error'] = '<strong>Danger!</strong> There was an error.';
 
-$string['manage_page_title'] = 'Manage requests:';
+
+$string['manage_page_title'] = 'Manage requests';
 $string['manage_tablehead_shortname'] = 'Shortname';
 $string['manage_tablehead_actions'] = 'Actions';
 $string['manage_noentry'] = 'There are no pending requests';
@@ -39,7 +42,7 @@ $string['manage_cancel_course'] = 'Cancel course';
 
 
 
-$string['delete_page_title'] = 'Delete existing courses:';
+$string['delete_page_title'] = 'Delete existing courses';
 $string['delete_next'] = 'Delete';
 $string['delete_modal_cancel'] = 'Cancel';
 $string['delete_modal_confirm'] = 'Confirm';

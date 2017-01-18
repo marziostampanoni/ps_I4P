@@ -18,7 +18,10 @@ $PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/courseseditor/js/mai
 require_login();
 
 echo $OUTPUT->header();
-echo('<h2>'.get_string('Creazione nuovi corsi', 'local_courseseditor').'</h2>');
+echo('<h2 style="">'.get_string('Creazione nuovi corsi', 'local_courseseditor').'</h2>');
+
+echo "<hr>";
+
 if($_GET['new']=='true')unset($_SESSION['courses_to_insert']);
 if(!$_SESSION['courses_to_insert']) {
     if ($_GET['user_type'] == 'usi') $ws = new UsiWebServices();
@@ -64,6 +67,8 @@ if(!$_SESSION['courses_to_insert']) {
             }
             echo "</ul>";
         }
+        echo '<br><a type="button" class="btn btn-primary btn-lg" href="resume.php">'.get_string('Avanti','local_courseseditor').'</a>';
+        echo "<hr>";
         $form_add = new FormNuovo();
         echo '<h4>'. get_string('Aggiungi corso','local_courseseditor').'</h4>';
         echo "<p>". get_string('Crea un corso che non esiste nei database ufficiale dei corsi USI/SUPSI','local_courseseditor')."</p>";
@@ -104,6 +109,9 @@ if(!$_SESSION['courses_to_insert']) {
         }
         echo "</ul>";
     }
+
+    echo '<br><a type="button" class="btn btn-primary btn-lg" href="resume.php">'.get_string('Avanti','local_courseseditor').'</a>';
+    echo "<hr>";
     $form_add->set_data(array('titolo'=>null,'codice'=>null,'categoria'=>null));
     echo '<h4>' . get_string('Aggiungi corso', 'local_courseseditor') . '</h4>';
     echo "<p>". get_string('Crea un corso che non esiste nei database ufficiale dei corsi USI/SUPSI','local_courseseditor')."</p>";

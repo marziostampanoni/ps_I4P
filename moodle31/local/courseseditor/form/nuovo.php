@@ -14,16 +14,16 @@ class FormNuovo extends moodleform
     protected function definition()
     {
         $form = $this->_form;
-        $form->setAttributes(array('id' => 'form-nuovo'));
-        $form->addElement('text', 'titolo',get_string('Titolo','local_courseseditor'),array('placeholder'=>get_string('titolo','local_courseseditor')));
-        $form->addElement('text', 'codice',get_string('Codice','local_courseseditor'),array('placeholder'=>get_string('codice','local_courseseditor')));
+
+        $form->addElement('text', 'titolo',get_string('Titolo','local_courseseditor'),array('placeholder'=>get_string('Titolo','local_courseseditor')));
+        $form->addRule('titolo', get_string('required'), 'required', '', 'client', false, false);
+
+        $form->addElement('text', 'codice',get_string('Codice','local_courseseditor'),array('placeholder'=>get_string('Codice','local_courseseditor')));
+        $form->addRule('codice', get_string('required'), 'required', '', 'client', false, false);
+
         $eachCat = coursecat::make_categories_list();
         $form->addElement('select','categoria',get_string('category'),$eachCat);
 
-        $buttonarray=array();
-        $buttonarray[] = &$form->createElement('submit', 'add', get_string('Aggiungi','local_courseseditor'));
-        $buttonarray[] = &$form->createElement('button', 'done', get_string('Avanti','local_courseseditor'), array('style' => 'width:200px;', 'onClick' => 'updateURL(\'resume\',\'form-nuovo\');'));
-        $form->addGroup($buttonarray, 'buttonar', '', array(' '), false);
-        $form->closeHeaderBefore('buttonar');
+        $form->addElement('submit', 'add', get_string('Aggiungi','local_courseseditor'));
     }
 }

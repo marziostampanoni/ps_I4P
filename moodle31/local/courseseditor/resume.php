@@ -75,7 +75,19 @@ if ($fromform = $resumeForm->get_data()) {
             $r->addCorso($c);
         }
 
-       $r->saveToDB();
+
+       if($r->saveToDB()){
+
+            echo '<div class="alert alert-success">
+                    ' . get_string('resume_page_success', 'local_courseseditor') . '
+                </div>';
+       }else{
+           echo '<div class="alert alert-danger">
+                    ' . get_string('resume_page_error', 'local_courseseditor') . '
+                </div>';
+       }
+        echo '<br><a type="button" class="btn btn-primary btn-lg" href="manage.php">'.get_string('manage_courses','local_courseseditor').'</a>';
+        echo '  <a type="button" class="btn btn-info btn-lg" href="start.php">'.get_string('pluginname','local_courseseditor').'</a>';
     }
 
 }else{

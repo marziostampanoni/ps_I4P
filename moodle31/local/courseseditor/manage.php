@@ -14,6 +14,7 @@ require_login();
 
 echo $OUTPUT->header();
 echo('<h2>' . get_string('manage_page_title', 'local_courseseditor') . '</h2><br><div>');
+
 if (isset($_GET['cancel']) && $_GET['cancel'] > 0) {
     $corso = new Corso(substr($_GET['cancel'], strpos($_GET['cancel'], "_") + 1));
     $corso->loadFromDB();

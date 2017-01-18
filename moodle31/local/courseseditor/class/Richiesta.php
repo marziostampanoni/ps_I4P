@@ -80,14 +80,17 @@ class Richiesta
             }else {
                 // inserisco la richiesta
                 $lastinsertid = $DB->insert_record('lcl_courseseditor_richiesta', $r, true);
+
                 if ($lastinsertid) {// se inserimento andato bene allora inserisco i corsi
                     foreach ($this->corsi_richiesti as $corso) {
+
                         $corso->setIdLclCourseseditorRichiesta($lastinsertid);
                         $corso->saveToDB();
                     }
                 }
             }
         } else return false;
+        return true;
     }
 
     /**
