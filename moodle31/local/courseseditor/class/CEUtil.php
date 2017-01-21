@@ -15,11 +15,15 @@ class CEUtil
             if ($prefix == 'name') {
                 $id = substr($name, strpos($name, "-") + 1);
                 $datasel = 'data-' . $id;
-                $parsed_data[] = json_decode($data->$datasel);
+                $parsed_data[] = json_decode($data[$datasel]);
             }
         }
         return $parsed_data;
     }
+
+
+
+
 
     static function getParsedDataFromFormResume($data){
         $parsed_data=array();
@@ -37,6 +41,17 @@ class CEUtil
             }
         }
         return $parsed_data;
+    }
+
+    static function mailNotificationToManager(){
+        $to      = get_config('local_courseseditor','to_mail');
+        $subject = get_config('local_courseseditor','subject_mail');
+        $message = get_config('local_courseseditor','message_mail');
+        $headers = 'From: '.get_config('local_courseseditor','from_mail') . "\r\n" .
+            'Reply-To: '.get_config('local_courseseditor','from_mail') . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+
+        mail($to, $subject, $message, $headers);
     }
 
 }

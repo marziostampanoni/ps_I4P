@@ -33,11 +33,10 @@ if ($fromform = $form->get_data()) {
 }
 
 $resumeForm = new FormResume(null, array('data' => $data));
-unset($_SESSION['courses_to_insert']);
+//unset($_SESSION['courses_to_insert']);
 if ($fromform = $resumeForm->get_data()) {
 
     $data = CEUtil::getParsedDataFromFormResume($_POST);
-
     if (count($data['corsi'] > 0)) {
         $r = new Richiesta();
         $r->setIdMdlUser($USER->id);
@@ -79,7 +78,7 @@ if ($fromform = $resumeForm->get_data()) {
 
 
         if ($r->saveToDB()) {
-
+            CEUtil::mailNotificationToManager();
             echo '<div class="alert alert-success">
                     ' . get_string('resume_page_success', 'local_courseseditor') . '
                 </div>';

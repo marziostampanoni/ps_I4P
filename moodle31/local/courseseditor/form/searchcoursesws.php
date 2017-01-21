@@ -9,7 +9,7 @@
 
 require_once("$CFG->libdir/formslib.php");
 
-class FormCercaCorsiWs extends moodleform
+class FormSearchCoursesWs extends moodleform
 {
     protected function definition()
     {

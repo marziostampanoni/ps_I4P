@@ -9,11 +9,12 @@
 
 require_once("$CFG->libdir/formslib.php");
 
-class FormSelectCorsi extends moodleform
+class FormSelectCourses extends moodleform
 {
     protected function definition()
     {
         global $USER;
+
         $form = $this->_form;
         $i=0;
         foreach ($this->_customdata['corsi'] as $corso) {
@@ -63,7 +64,8 @@ class FormSelectCorsi extends moodleform
             $i++;
         }
 
-        $form->addElement('submit', 'submit_selectcorsi', get_string('Avanti','local_courseseditor'), array('style' => 'width:100px;'));
+        //$form->addElement('submit', 'submit_selectcorsi', get_string('Avanti','local_courseseditor'), array('style' => 'width:100px;'));
+        $this->add_action_buttons(false,get_string('Avanti','local_courseseditor'));
     }
 
 }

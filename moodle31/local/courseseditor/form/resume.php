@@ -10,7 +10,7 @@ class FormResume extends moodleform
         global $DB;
         $form = $this->_form;
 
-        if (count($this->_customdata['data'])) {
+        //if (count($this->_customdata['data'])) {
             $eachCat = coursecat::make_categories_list();
             $form->addElement('html', '<table class="generaltable table-bordered">');
             $form->addElement('html', '<tr><th>' . get_string('resume_tablehead_title', 'local_courseseditor') . '</th><th>' . get_string('resume_tablehead_cat', 'local_courseseditor') . '</th><th>' . get_string('resume_tablehead_teacher', 'local_courseseditor') . '</th><th>' . get_string('resume_tablehead_editingteacher', 'local_courseseditor') . '</th><th>' . get_string('resume_tablehead_note', 'local_courseseditor') . '</th></tr>');
@@ -57,9 +57,10 @@ class FormResume extends moodleform
             $form->addElement('html', '</table>');
             $form->addElement('textarea', 'comments', get_string("resume_comments", "local_courseseditor"), 'rows="5" cols="80" style="resize:none; margin-left:2%;" placeholder="' . get_string('resume_comment_placeholder', 'local_courseseditor') . '"');
             $form->addElement('submit', 'insert', get_string('resume_next', 'local_courseseditor'));
-        } else {
-            $form->addElement('html','No requests');
-        }
+
+//        } else {
+//            $form->addElement('html','No requests');
+//        }
 
     }
 }

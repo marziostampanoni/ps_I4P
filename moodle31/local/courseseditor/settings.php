@@ -15,8 +15,7 @@ if ($hassiteconfig) {
      */
 
     // the plugin name
-    $plugin_description = get_string('pluginname_desc', 'local_courseseditor');
-    $plugin_header = new admin_setting_heading('local_courseseditor_settings', '', $plugin_description);
+    $plugin_header = new admin_setting_heading('local_courseseditor_settings', '', '');
 
     /*
      * Web service settings
@@ -43,11 +42,49 @@ if ($hassiteconfig) {
         $usi_host_description ,
         $default_location,
         PARAM_TEXT);
-	/*
+
+
+    /*
+   * Mail notification settings
+   */
+
+    // mail address receiver
+    $config_name = 'local_courseseditor/to_mail';
+    $name = get_string('to_mail_name', 'local_courseseditor');
+    $description = get_string('to_mail_description', 'local_courseseditor');
+    $default = 'rezart.lohja@student.supsi.ch,marzio.stampanoni@student.supsi.ch';
+    $to_mail_text = new admin_setting_configtext($config_name, $name, $description , $default, PARAM_TEXT);
+
+    // mail address sender
+    $config_name = 'local_courseseditor/from_mail';
+    $name = get_string('from_mail_name', 'local_courseseditor');
+    $description = get_string('from_mail_description', 'local_courseseditor');
+    $default = 'moodle@moodle.moodle';
+    $from_mail_text = new admin_setting_configtext($config_name, $name, $description , $default, PARAM_TEXT);
+
+    // mail address receiver
+    $config_name = 'local_courseseditor/subject_mail';
+    $name = get_string('subject_mail_name', 'local_courseseditor');
+    $description = get_string('subject_mail_description', 'local_courseseditor');
+    $default = 'Nuova richiesta modifiche corsi';
+    $subject_mail_text = new admin_setting_configtext($config_name, $name, $description , $default, PARAM_TEXT);
+
+    // mail address receiver
+    $config_name = 'local_courseseditor/message_mail';
+    $name = get_string('message_mail_name', 'local_courseseditor');
+    $description = get_string('message_mail_description', 'local_courseseditor');
+    $default = 'Ci sono nuove richiesti di modifiche corsi su moodle.';
+    $message_mail_text = new admin_setting_configtext($config_name, $name, $description , $default, PARAM_TEXT);
+
+    /*
      * Compose the settings page
      */
 
     $settings->add($plugin_header);
     $settings->add($supsi_host_text);
     $settings->add($usi_host_text);
+    $settings->add($to_mail_text);
+    $settings->add($from_mail_text);
+    $settings->add($subject_mail_text);
+    $settings->add($message_mail_text);
 }

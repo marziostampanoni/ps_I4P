@@ -1,7 +1,6 @@
 <?php
 
 $string['pluginname'] = 'Courses editor';
-$string['pluginname_desc'] = 'This plugin ...';
 
 $string['editingteacher'] = 'Teacher';
 $string['teacher'] = 'Assistant';
@@ -60,18 +59,26 @@ $string['filter_bycat_allcat'] = 'Select All Categories';
 
 // Settings
 $string['usi_host_name'] = 'USI Host';
-$string['usi_host_description'] = 'The address of the USI server';
+$string['usi_host_description'] = 'The address of the USI web service';
 $string['supsi_host_name'] = 'SUPSI Host';
-$string['supsi_host_description'] = 'The address of the SUPSI server';
+$string['supsi_host_description'] = 'The address of the SUPSI web service';
+$string['to_mail_name'] = 'Mail To';
+$string['to_mail_description'] = 'The e-mail address to send the notification';
+$string['from_mail_name'] = 'Mail from';
+$string['from_mail_description'] = 'The e-mail address that sends the notification';
+$string['subject_mail_name'] = 'Mail subject';
+$string['subject_mail_description'] = 'The subject of the mail';
+$string['message_mail_name'] = 'Mail message';
+$string['message_mail_description'] = 'The message to send by mail';
 
 // Nuovo
 
 $string['String di ricerca'] = 'Search string...';
 $string['Solo corsi di'] = 'Only courses of';
-$string['Seleziona corsi'] = 'Select courses to create';
+$string['Select courses'] = 'Select courses to create';
 $string['Altri corsi'] = 'Other courses';
 $string['Creazione nuovi corsi'] = 'Create new courses';
-$string['Aggiungi'] = 'Add';
+$string['add'] = 'Add';
 $string['Avanti'] = 'Next';
 $string['Titolo'] = 'Title';
 $string['Codice'] = 'Code';
