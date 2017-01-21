@@ -19,15 +19,9 @@ require_login();
 echo $OUTPUT->header();
 echo('<h2>' . get_string('resume_page_title', 'local_courseseditor') . '</h2><br><div>');
 $form = new FormClona();
-$cancelForm = new FormCancella();
-
 
 if ($fromform = $form->get_data()) {
-    var_dump($fromform);
-    $data = CEUtil::getParsedDataFromForm($fromform);
-    // var_dump($data);
-} else if ($fromform = $cancelForm->get_data()) {
-    $data = CEUtil::getParsedDataFromForm($fromform);
+    $data = CEUtil::getParsedDataFromForm($_POST);
 } else if ($_SESSION['courses_to_insert']) {
     $data = $_SESSION['courses_to_insert'];
 }

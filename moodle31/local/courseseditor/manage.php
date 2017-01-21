@@ -19,7 +19,7 @@ echo('<h2>' . get_string('manage_page_title', 'local_courseseditor') . '</h2><br
 
 //Test if there is a course to delete/create
 if (isset($_GET['cancel']) && $_GET['cancel'] > 0) {
-    $corso = new Corso(substr($_GET['cancel'], strpos($_GET['cancel'], "_") + 1));
+    $corso = new Corso($_GET['cancel']);
     $corso->loadFromDB();
     //TODO cancellare il corso su moodle
     $corso->stato_richiesta = STATO_RICHIESTA_FATTO;
@@ -38,13 +38,14 @@ if (isset($_GET['save']) && $_GET['save'] > 0) {
 }
 
 if (isset($_GET['reject']) && $_GET['reject'] > 0) {
-    $corso = new Corso(substr($_GET['reject'], strpos($_GET['reject'], "_") + 1));
+    $corso = new Corso($_GET['reject']);
     $corso->loadFromDB();
     $corso->stato_richiesta = STATO_RICHIESTA_SOSPESO;
     $corso->saveToDB();
 }
 
 if (isset($_GET['savereq']) && $_GET['savereq'] > 0) {
+    var_dump($_GET['savereq']);
 
 }
 

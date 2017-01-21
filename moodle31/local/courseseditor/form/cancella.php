@@ -46,7 +46,7 @@ class FormCancella extends moodleform
                             }
 
                             $form->addElement('checkbox', 'name-' . $corso->instanceid, '', $details);
-                            $data = array('id' => $corso->instanceid, 'title' => $corso->fullname, 'cat' => $id, 'teachers' => $teachers, 'editingteacher' => $editingteachers);
+                            $data = array('id' => $corso->instanceid, 'title' => $corso->fullname, 'cat' => $id, 'teachers' => $teachers, 'editingteacher' => $editingteachers, 'id_mdl_course' => $corso->id);
                             $form->addElement('hidden', 'data-' . $corso->instanceid, json_encode($data));
                         }
                     }

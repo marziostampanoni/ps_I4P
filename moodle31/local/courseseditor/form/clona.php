@@ -24,7 +24,14 @@ class FormClona extends moodleform
                                 $form->addElement('html', '<br><hr><b>' . $cat . '</b><br><hr>');
                                 $label = false;
                             }
-                            $details = '<b>' . $corso->fullname . '</b> - ' . $cat . ', Ruolo: ' . $corso->archetype;
+                            switch ($corso->archetype){
+                                case 'editingteacher':
+                                    $ruolo = get_string('editingteacher', 'local_courseseditor');
+                                    break;
+                                case 'teacher':
+                                    $ruolo = get_string('teacher', 'local_courseseditor');
+                            }
+                            $details = '<b>' . $corso->fullname . '</b> - ' . $cat . ', Ruolo: ' . $ruolo;
 
                             $role = $DB->get_record('role', array('shortname' => 'editingteacher'));
                             $context = get_context_instance(CONTEXT_COURSE, $corso->instanceid);

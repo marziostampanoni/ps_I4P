@@ -9,8 +9,6 @@
 
 function local_courseseditor_extend_navigation(global_navigation $navigation)
 {
-    global $USER, $PAGE;
-
     if (!isloggedin()) {
         return;
     }

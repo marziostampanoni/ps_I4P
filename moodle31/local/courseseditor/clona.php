@@ -13,8 +13,6 @@ $PAGE->set_pagelayout('admin');
 $PAGE->set_title("Course Creator");
 $PAGE->set_heading("Course Creator");
 $PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/courseseditor/js/main.js'));
-
-//$PAGE->set_url($CFG->wwwroot.'/local/courseseditor/clona.php');
 require_login();
 
 echo $OUTPUT->header();
@@ -34,7 +32,6 @@ $courses = $DB->get_records_sql($query, array($USER->id));
 
 
 $filter = new FormSelectCat();
-// apply filter selection by trim courses to display
 if ($fromform = $filter->get_data()) {
     if (isset($fromform->cat) && $fromform->cat > 0) {
         $subCat = array();
@@ -50,13 +47,10 @@ if ($fromform = $filter->get_data()) {
     }
 }
 
-//
+
 $form = new FormClona(new moodle_url($CFG->wwwroot . '/local/courseseditor/resume.php'), array('data'=>$courses));
 if ($fromform = $form->get_data()) {
-    var_dump($fromform);
-    //redirect($nexturl);
 }
-// create select filter for categories
 
 
 

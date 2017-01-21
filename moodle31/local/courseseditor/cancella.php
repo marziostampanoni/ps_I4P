@@ -59,12 +59,9 @@ $req = $DB->get_records('lcl_courseseditor_richiesta', array('id_mdl_user' => $U
 foreach ($req as $idReq => $request) {
     $cond = array('id_lcl_courseseditor_richiesta' => $idReq, 'tipo_richiesta' => 'Cancellare');
     $alredyRequested = $DB->get_records('lcl_courseseditor_corso', $cond);
-
-//    TODO manca id in tabella corso rispettivo a id in tabella moodle!!!
-//    if(isset($alredyRequested)){
-//        unset($courses[$alredyRequested->id_mdl_course]);
-//    }
-
+    if (isset($alredyRequested)) {
+        unset($courses[$alredyRequested[$idReq]->id_mdl_course]);
+    }
 }
 
 
@@ -85,6 +82,7 @@ if ($fromform = $form->get_data()) {
             $corso = new Corso();
             $corso->setIdMdlCourseCategories($data->cat);
             $corso->setShortname('SOMSHRTNM');
+            $corso->setIdMdlCourse($data->id_mdl_course);
             $corso->setStatoRichiesta(STATO_RICHIESTA_DA_GESTIRE);
             $corso->setTipoRichiesta(TIPO_RICHIESTA_CANCELLARE);
             $corso->setTitolo($data->title);

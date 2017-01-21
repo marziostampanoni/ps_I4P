@@ -19,6 +19,7 @@ class Corso
 {
     var $id;
     var $id_lcl_courseseditor_richiesta;
+    var $id_mdl_course;
     var $titolo;
     var $shortname;
     var $id_mdl_course_categories;
@@ -72,6 +73,8 @@ class Corso
         $r->titolo=$this->titolo;
         $r->shortname=$this->shortname;
         $r->id_mdl_course_categories=$this->id_mdl_course_categories;
+        $r->id_mdl_course=$this->id_mdl_course;
+
         $r->note=$this->note;
         $r->tipo_richiesta=$this->tipo_richiesta;
 
@@ -240,5 +243,19 @@ class Corso
         $this->stato_richiesta = $stato_richiesta;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getIdMdlCourse()
+    {
+        return $this->id_mdl_course;
+    }
 
+    /**
+     * @param mixed $id_mdl_course
+     */
+    public function setIdMdlCourse($id_mdl_course)
+    {
+        $this->id_mdl_course = $id_mdl_course;
+    }
 }
