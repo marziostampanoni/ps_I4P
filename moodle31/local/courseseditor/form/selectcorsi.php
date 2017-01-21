@@ -65,4 +65,5 @@ class FormSelectCorsi extends moodleform
 
         $form->addElement('submit', 'submit_selectcorsi', get_string('Avanti','local_courseseditor'), array('style' => 'width:100px;'));
     }
+
 }

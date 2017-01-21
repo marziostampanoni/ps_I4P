@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/courseseditor/db" VERSION="20170118" COMMENT="XMLDB file for Moodle local/courseseditor"
+<XMLDB PATH="local/courseseditor/db" VERSION="20170121" COMMENT="XMLDB file for Moodle local/courseseditor"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -22,6 +22,7 @@
         <FIELD NAME="titolo" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="Titolo del corso"/>
         <FIELD NAME="shortname" TYPE="char" LENGTH="30" NOTNULL="false" SEQUENCE="false" COMMENT="Codice corto che si da a un corso"/>
         <FIELD NAME="id_mdl_course_categories" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="Categoria alla quale appartiene il corso"/>
+        <FIELD NAME="id_mdl_course" TYPE="int" LENGTH="11" NOTNULL="false" SEQUENCE="false" COMMENT="Relazione con corso moodle"/>
         <FIELD NAME="note" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Note"/>
         <FIELD NAME="tipo_richiesta" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="Inserire" SEQUENCE="false" COMMENT="Tipo di richiesta scelta tra Inserire;Clonare:Cancellare"/>
         <FIELD NAME="stato_richiesta" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="Da gestire" SEQUENCE="false" COMMENT="Stato della richiesta fatta per questo corso Fatto;Sospeso;Da gestire"/>
