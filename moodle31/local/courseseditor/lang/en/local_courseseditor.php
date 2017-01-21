@@ -34,19 +34,29 @@ $string['resume_page_error'] = '<strong>Danger!</strong> There was an error.';
 $string['manage_page_title'] = 'Manage requests';
 $string['manage_tablehead_shortname'] = 'Shortname';
 $string['manage_tablehead_actions'] = 'Actions';
+$string['manage_tablehead_type'] = 'Type';
 $string['manage_noentry'] = 'There are no pending requests';
 $string['manage_btn_confirm'] = 'Confirm and delete';
 $string['manage_request_user'] = 'Submitted by';
-$string['manage_save_course'] = 'Save Request';
+$string['manage_save_course'] = 'Create course';
 $string['manage_cancel_course'] = 'Cancel course';
-
-
+$string['manage_filter_byuser'] = 'Filter by User';
+$string['manage_sel_user'] = 'Filter by User';
+$string['manage_filter_nouserselected'] = 'All users';
+$string['manage_reject_req'] = 'Reject Request';
+$string['manage_save_req'] = 'Save Request';
+$string['manage_cancel_req'] = 'Cancel Request';
 
 $string['delete_page_title'] = 'Delete existing courses';
 $string['delete_next'] = 'Delete';
 $string['delete_modal_cancel'] = 'Cancel';
 $string['delete_modal_confirm'] = 'Confirm';
 $string['delete_modal_body'] = 'Delete these existing courses. This peration is definitive and can\'t be undone';
+
+$string['filter_nocatselected'] = 'No categories selected';
+$string['filter_bycat'] = 'Filter by category';
+$string['filter_bycat_allcat'] = 'Select All Categories';
+
 
 // Settings
 $string['usi_host_name'] = 'USI Host';
