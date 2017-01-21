@@ -54,7 +54,7 @@ class FormSelectCorsi extends moodleform
 
             $form->addElement('checkbox', 'name-' . $i, '', $details, array('value' => 'asd'), array('value' => 'asdfghj'));
             $data = array('id' => null,
-                'title' => "<b> $titolo</b>$facolta$cdl$modulo$dip",
+                'title' => "$titolo$facolta$cdl$modulo$dip",
                 'cat' => null,
                 'teachers' => null,
                 'editingteacher' => null

@@ -25,7 +25,7 @@ if ($hassiteconfig) {
     $supsi_host_config_name = 'local_courseseditor/supsi_host';
     $supsi_host_name = get_string('supsi_host_name', 'local_courseseditor');
     $supsi_host_description = get_string('supsi_host_description', 'local_courseseditor');
-    $default_location = 'supsi.ch';
+    $default_location = 'http://localhost:8888/moodle31/local/courseseditor/ws_per_test/supsi.php';
     $supsi_host_text = new admin_setting_configtext($supsi_host_config_name,
         $supsi_host_name,
         $supsi_host_description ,
@@ -36,7 +36,7 @@ if ($hassiteconfig) {
     $usi_host_config_name = 'local_courseseditor/usi_host';
     $usi_host_name = get_string('usi_host_name', 'local_courseseditor');
     $usi_host_description = get_string('usi_host_description', 'local_courseseditor');
-    $default_location = 'usi.ch';
+    $default_location = 'http://localhost:8888/moodle31/local/courseseditor/ws_per_test/usi.php';
     $usi_host_text = new admin_setting_configtext($usi_host_config_name,
         $usi_host_name,
         $usi_host_description ,

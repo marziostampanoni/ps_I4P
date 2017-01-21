@@ -88,11 +88,11 @@ if(!$_SESSION['courses_to_insert']) {
     $form_add = new FormNuovo();
 
     if ($fromform = $form_add->get_data()) {
-        $cat = $DB->get_record('course_categories', array('id' => $fromform->categoria));
+
 
         $data = new stdClass();
         $data->idnull;
-        $data->title = "<b>" . $fromform->titolo . "</b>, " . $fromform->codice;
+        $data->title =  $fromform->titolo . ", " . $fromform->codice;
         $data->cat = $fromform->categoria;
         $data->teachers = null;
         $data->editingteacher = null;
