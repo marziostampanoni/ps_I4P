@@ -25,5 +25,6 @@ class FormAddNewCourse extends moodleform
         $form->addElement('select','category',get_string('category'),$eachCat);
 
         $form->addElement('submit', 'add', get_string('add','local_courseseditor'));
+        //$this->add_action_buttons(false,get_string('add','local_courseseditor'));
     }
 }

@@ -49,6 +49,10 @@ echo "<hr>";
         $_SESSION['courses_to_insert_just_used']=true;
     }
 
+echo '<h4>'. get_string('Aggiungi corso','local_courseseditor').'</h4>';
+echo "<p>". get_string('Crea un corso che non esiste nei database ufficiale dei corsi USI/SUPSI','local_courseseditor')."</p>";
+$form_add->display();
+echo "<hr>";
     if(count($_SESSION['courses_to_insert'])>0) {
         echo '<h4>' . get_string('Corsi selezionati', 'local_courseseditor') . '</h4>';
         echo "<ul>";
@@ -57,13 +61,11 @@ echo "<hr>";
         }
         echo "</ul>";
         echo '<br><a type="button" class="btn btn-primary btn-lg" href="resume.php">'.get_string('Avanti','local_courseseditor').'</a>';
-        echo "<hr>";
+
     }
 
 
-    echo '<h4>'. get_string('Aggiungi corso','local_courseseditor').'</h4>';
-    echo "<p>". get_string('Crea un corso che non esiste nei database ufficiale dei corsi USI/SUPSI','local_courseseditor')."</p>";
-    $form_add->display();
+
 
 
 
