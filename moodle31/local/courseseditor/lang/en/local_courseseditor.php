@@ -75,7 +75,7 @@ $string['message_mail_description'] = 'The message to send by mail';
 
 $string['String di ricerca'] = 'Search string...';
 $string['Solo corsi di'] = 'Only courses of';
-$string['Select courses'] = 'Select courses to create';
+$string['Select courses'] = 'Select courses from USI/SUPSI database';
 $string['Altri corsi'] = 'Other courses';
 $string['Creazione nuovi corsi'] = 'Create new courses';
 $string['add'] = 'Add';

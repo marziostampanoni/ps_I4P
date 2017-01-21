@@ -14,7 +14,7 @@ class FormSelectCat extends moodleform
         $form = $this->_form;
         $group[] = &$form->createElement('select', 'cat', get_string('filter_bycat', 'local_courseseditor'), $eachCat);
         $group[] = &$form->createElement('submit', 'next', get_string('filter_bycat', 'local_courseseditor'));
-        $form->addGroup($group, 'userFilter', '', array(' '), false);
-        $form->closeHeaderBefore('userFilter');
+        $form->addGroup($group, 'buttonar', '', array(' '), false);
+        $form->closeHeaderBefore('buttonar');
     }
 }

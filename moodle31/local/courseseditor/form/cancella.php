@@ -22,10 +22,10 @@ class FormCancella extends moodleform
                     foreach ($this->_customdata['courses'] as $corso) {
                         if (isset($catcourses[$corso->instanceid])) {
                             if ($label) {
-                                $form->addElement('html', '<br><hr><b>' . $cat . '</b><br><hr>');
+                                $form->addElement('html', '<br><div style="display: table; width:100%;"><div style="border: solid 1px lightgray; background-color: lightgray; height: 30px; padding-left: 5px; display: table-cell; vertical-align: middle; margin-bottom: 20px; min-width: 100%;"><b>' . $cat . '</b></div></div>');
                                 $label = false;
                             }
-                            switch ($corso->archetype){
+                            switch ($corso->archetype) {
                                 case 'editingteacher':
                                     $ruolo = get_string('editingteacher', 'local_courseseditor');
                                     break;
