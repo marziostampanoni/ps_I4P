@@ -19,7 +19,7 @@ $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/local/courseseditor/js/main
 
 
 echo $OUTPUT->header();
-echo('<h2>' . get_string('delete_page_title', 'local_courseseditor') . '</h2><br><div>');
+echo('<h2>' . get_string('delete_page_title', 'local_courseseditor') . '</h2><hr><br><div>');
 
 
 $query = "
@@ -57,7 +57,7 @@ if ($fromform = $filter->get_data()) {
 
 $req = $DB->get_records('lcl_courseseditor_richiesta', array('id_mdl_user' => $USER->id));
 foreach ($req as $idReq => $request) {
-    $cond = array('id_lcl_courseseditor_richiesta' => $idReq, 'tipo_richiesta' => 'Cancellare');
+    $cond = array('id_lcl_courseseditor_richiesta' => $idReq, 'tipo_richiesta' => 'Cancellare', 'stato_richiesta' => STATO_RICHIESTA_DA_GESTIRE);
     $alredyRequested = $DB->get_records('lcl_courseseditor_corso', $cond);
     if (isset($alredyRequested)) {
         unset($courses[$alredyRequested[$idReq]->id_mdl_course]);

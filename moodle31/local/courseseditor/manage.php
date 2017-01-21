@@ -14,10 +14,10 @@ $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/local/courseseditor/js/main
 require_login();
 
 echo $OUTPUT->header();
-echo('<h2>' . get_string('manage_page_title', 'local_courseseditor') . '</h2><br><div>');
+echo('<h2>' . get_string('manage_page_title', 'local_courseseditor') . '</h2><hr><br><div>');
 
 
-//Test if there is a course to delete/create
+// [Admin Actions] Test if there is a course to delete/create or a request to reject
 if (isset($_GET['cancel']) && $_GET['cancel'] > 0) {
     $corso = new Corso($_GET['cancel']);
     $corso->loadFromDB();
@@ -44,6 +44,7 @@ if (isset($_GET['reject']) && $_GET['reject'] > 0) {
     $corso->saveToDB();
 }
 
+// [Ures Actions] Test if there is a request to modify/cancel
 if (isset($_GET['savereq']) && $_GET['savereq'] > 0) {
     var_dump($_GET['savereq']);
 

@@ -14,7 +14,7 @@ define("TIPO_RICHIESTA_CANCELLARE", "Cancellare");
 
 define("STATO_RICHIESTA_FATTO", "Fatto");
 define("STATO_RICHIESTA_SOSPESO", "Sospeso");
-define("STATO_RICHIESTA_DA_GESTIRE", "Da gestire");
+define("STATO_RICHIESTA_DA_GESTIRE", "Dagestire");
 class Corso
 {
     var $id;

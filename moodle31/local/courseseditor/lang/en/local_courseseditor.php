@@ -47,7 +47,7 @@ $string['manage_save_req'] = 'Save Request';
 $string['manage_cancel_req'] = 'Cancel Request';
 
 $string['delete_page_title'] = 'Delete existing courses';
-$string['delete_next'] = 'Delete';
+$string['delete_next'] = 'Delete selection';
 $string['delete_modal_cancel'] = 'Cancel';
 $string['delete_modal_confirm'] = 'Confirm';
 $string['delete_modal_body'] = 'Delete these existing courses. This peration is definitive and can\'t be undone';

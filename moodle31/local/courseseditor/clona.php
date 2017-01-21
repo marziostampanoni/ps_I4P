@@ -16,7 +16,7 @@ $PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/courseseditor/js/mai
 require_login();
 
 echo $OUTPUT->header();
-echo('<h2>'.get_string('clone_page_title','local_courseseditor').'</h2><br><div>');
+echo('<h2>'.get_string('clone_page_title','local_courseseditor').'</h2><hr><br><div>');
 
 $query = "
 SELECT *  FROM

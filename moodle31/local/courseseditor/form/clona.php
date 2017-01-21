@@ -63,8 +63,7 @@ class FormClona extends moodleform
         }
 
         $form->addElement('html', '<br>');
-        $form->addElement('submit','clone', get_string("clone_next", 'local_courseseditor'));
-        $form->closeHeaderBefore('next');
+        $this->add_action_buttons('false', get_string("clone_next", 'local_courseseditor'));
 
     }
 }

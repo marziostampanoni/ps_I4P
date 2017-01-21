@@ -25,7 +25,7 @@
         <FIELD NAME="id_mdl_course" TYPE="int" LENGTH="11" NOTNULL="false" SEQUENCE="false" COMMENT="Relazione con corso moodle"/>
         <FIELD NAME="note" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Note"/>
         <FIELD NAME="tipo_richiesta" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="Inserire" SEQUENCE="false" COMMENT="Tipo di richiesta scelta tra Inserire;Clonare:Cancellare"/>
-        <FIELD NAME="stato_richiesta" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="Da gestire" SEQUENCE="false" COMMENT="Stato della richiesta fatta per questo corso Fatto;Sospeso;Da gestire"/>
+        <FIELD NAME="stato_richiesta" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="Dagestire" SEQUENCE="false" COMMENT="Stato della richiesta fatta per questo corso Fatto;Sospeso;Dagestire"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

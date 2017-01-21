@@ -18,23 +18,35 @@ class FormManage extends moodleform
         if (count($this->_customdata['requests']) > 0) {
             foreach ($this->_customdata['users'] as $userId => $requests) {
                 $thereare = false;
+                $toIgnore = array();
                 foreach ($requests as $request) {
                     foreach ($request->corsi_richiesti as $corso) {
                         if ($corso->stato_richiesta == STATO_RICHIESTA_DA_GESTIRE) {
                             $thereare = true;
+                        } else {
+                            $toIgnore[] = $request->id;
                         }
                     }
                 }
                 if ($thereare) {
                     $user = get_complete_user_data('id', $userId);
                     $form->addElement('html', '<h4>' . get_string('manage_request_user', 'local_courseseditor') . ': ' . $user->email . '</h4>');
-                    //<table class="generaltable table-bordered">
                     $form->addElement('html', '<div class="container">');
                     foreach ($requests as $request) {
-                        $form->addElement('html', '<table class="table table-bordered">');
-                        $form->addElement('html', '<tr bgcolor="#d3d3d3"><th>' . get_string('manage_tablehead_type', 'local_courseseditor') . ' / ' . get_string('resume_tablehead_actions', 'local_courseseditor') . '</th><th colspan="3">' . get_string('resume_tablehead_cat', 'local_courseseditor') . '</th></tr>');
+                        if(!in_array($request->id, $toIgnore)){
+                            $form->addElement('html', '<table class="table" style="border: solid 1px lightgray;">');
+                        }
+                        $odd = true;
                         foreach ($request->corsi_richiesti as $corso) {
+                            if ($odd) {
+                                $odd = false;
+                                $color = 'white';
+                            } else {
+                                $odd = true;
+                                $color = 'rgba(120,120,120,0.1)';
+                            }
                             if ($corso->stato_richiesta == STATO_RICHIESTA_DA_GESTIRE || !is_siteadmin($USER->id)) {
+                                $form->addElement('html', '<tr bgcolor="#d3d3d3"><th>' . get_string('manage_tablehead_type', 'local_courseseditor') . ' / ' . get_string('resume_tablehead_actions', 'local_courseseditor') . '</th><th colspan="3"  style="border-right: solid 1px lightgray;">' . get_string('resume_tablehead_cat', 'local_courseseditor') . '</th></tr>');
                                 $action = 'save';
                                 $string = 'manage_save_course';
                                 if ($corso->tipo_richiesta == TIPO_RICHIESTA_CANCELLARE) {
@@ -45,8 +57,8 @@ class FormManage extends moodleform
                                     $action = 'savereq';
                                     $string = 'manage_save_req';
                                 }
-                                $form->addElement('html', '<tr>');
-                                $form->addElement('html', '<td rowspan="6" nowrap class="description" style="vertical-align: middle;">');
+                                $form->addElement('html', '<tr style="background-color: ' . $color . '">');
+                                $form->addElement('html', '<td rowspan="6" nowrap class="description" style="vertical-align: middle; border-right: solid 1px lightgray;">');
 
                                 $form->addElement('html', '<span style="top: -10px;">' . $corso->tipo_richiesta . '</span>');
                                 $form->addElement('html', '<br><hr>');
@@ -60,7 +72,7 @@ class FormManage extends moodleform
                                 }
                                 $form->addElement('html', '<br><a onclick="actionOnCourse(' . $corso->id . ', \'' . $action . '\')">' . get_string($string, 'local_courseseditor') . '</a>');
                                 $form->addElement('html', '</td>');
-                                $form->addElement('html', '<td colspan="3"><select>');
+                                $form->addElement('html', '<td colspan="3" style="border-right: solid 1px lightgray;"><select>');
 
                                 foreach ($eachCat as $id => $option) {
                                     if ($corso->id_mdl_course_categories == $id) {
@@ -70,14 +82,14 @@ class FormManage extends moodleform
                                     }
                                 }
                                 $form->addElement('html', '</select></td></tr>');
-                                $form->addElement('html', '<tr  bgcolor="#d3d3d3"><th colspan="2" style="width: 70%">' . get_string('resume_tablehead_title', 'local_courseseditor') . '</th><th colspan="2">' . get_string('manage_tablehead_shortname', 'local_courseseditor') . '</th><tr>');
-                                $form->addElement('html', '<tr>');
+                                $form->addElement('html', '<tr  bgcolor="#d3d3d3" style="border-right: solid 1px lightgray;"><th colspan="2" style="width: 70%">' . get_string('resume_tablehead_title', 'local_courseseditor') . '</th><th colspan="2">' . get_string('manage_tablehead_shortname', 'local_courseseditor') . '</th><tr style="background-color: ' . $color . '">');
+                                $form->addElement('html', '<tr style="background-color: ' . $color . '">');
                                 $form->addElement('html', '<td colspan="2">');
                                 $form->addElement('html', '<input title="' . $corso->titolo . '" type="text" value="' . $corso->titolo . '" style="display:table-cell; width:95%">');
                                 $form->addElement('html', '</td>');
                                 $form->addElement('html', '<td colspan="2"><input type="text" value="' . $corso->shortname . '" size="40" style="display:table-cell; width:95%"></td></tr>');
 
-                                $form->addElement('html', '<tr  bgcolor="#d3d3d3"><th style="width: 33%">' . get_string('resume_tablehead_teacher', 'local_courseseditor') . '</th><th style="width: 33%">' . get_string('resume_tablehead_editingteacher', 'local_courseseditor') . '</th><th style="width: 33%">' . get_string('resume_tablehead_note', 'local_courseseditor') . '</th></tr><tr>');
+                                $form->addElement('html', '<tr  bgcolor="#d3d3d3"><th style="width: 33%">' . get_string('resume_tablehead_teacher', 'local_courseseditor') . '</th><th style="width: 33%">' . get_string('resume_tablehead_editingteacher', 'local_courseseditor') . '</th><th style="width: 33%; border-right: solid 1px lightgray;">' . get_string('resume_tablehead_note', 'local_courseseditor') . '</th></tr><tr style="background-color: ' . $color . '">');
 
                                 $teachers = array();
                                 $editingteachers = array();
@@ -100,7 +112,7 @@ class FormManage extends moodleform
                                     $form->addElement('html', '<li value="' . $option->id . '" style="white-space: nowrap;">' . $option->nome . ' ' . $option->cognome . '</li>');
                                 }
                                 $form->addElement('html', '</ul></td>');
-                                $form->addElement('html', '<td><textarea style="resize: none; display:table-cell; width:95%;height: 95%;">' . $corso->note . '</textarea></td>');
+                                $form->addElement('html', '<td style="border-right: solid 1px lightgray;"><textarea style="resize: none; display:table-cell; width:95%;height: 95%;">' . $corso->note . '</textarea></td>');
                                 $form->addElement('html', '</tr>');
                             }
 
