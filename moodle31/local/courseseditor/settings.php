@@ -3,6 +3,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($hassiteconfig) {
+
     // create the settings page
     $settings = new admin_settingpage('local_courseseditor', get_string('pluginname', 'local_courseseditor'));
 

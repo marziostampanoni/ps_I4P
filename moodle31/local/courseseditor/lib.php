@@ -7,28 +7,26 @@
  */
 
 
-function local_courseseditor_extend_navigation(global_navigation $navigation) {
+function local_courseseditor_extend_navigation(global_navigation $navigation)
+{
     global $USER, $PAGE;
 
     if (!isloggedin()) {
         return;
     }
 
-    $node = $navigation->add(get_string('pluginname','local_courseseditor'), new moodle_url('/local/courseseditor/start.php'), navigation_node::TYPE_CONTAINER);;
-    $node->add(get_string('new_courses','local_courseseditor'), new moodle_url('/local/courseseditor/nuovo.php?new=true'));
-    $node->add(get_string('clone_courses','local_courseseditor'), new moodle_url('/local/courseseditor/clona.php'));
-    $node->add(get_string('delete_courses','local_courseseditor'), new moodle_url('/local/courseseditor/cancella.php'));
-    if($PAGE->url == new moodle_url('/local/courseseditor/resume.php')){
-        $node->add(get_string('resume_courses','local_courseseditor'), new moodle_url('/local/courseseditor/resume.php'));
+    $node = $navigation->add(get_string('pluginname', 'local_courseseditor'), new moodle_url('/local/courseseditor/start.php'), navigation_node::TYPE_CONTAINER);;
+    $node->add(get_string('new_courses', 'local_courseseditor'), new moodle_url('/local/courseseditor/nuovo.php?new=true'));
+    $node->add(get_string('clone_courses', 'local_courseseditor'), new moodle_url('/local/courseseditor/clona.php'));
+    $node->add(get_string('delete_courses', 'local_courseseditor'), new moodle_url('/local/courseseditor/cancella.php'));
+    if ($PAGE->url == new moodle_url('/local/courseseditor/resume.php')) {
+        $node->add(get_string('resume_courses', 'local_courseseditor'), new moodle_url('/local/courseseditor/resume.php'));
     }
-
-    if (!is_siteadmin()) {
-        return;
-    }
-    $node->add(get_string('manage_courses','local_courseseditor'), new moodle_url('/local/courseseditor/manage.php'));
+    $node->add(get_string('manage_courses', 'local_courseseditor'), new moodle_url('/local/courseseditor/manage.php'));
 
 }
 
-function local_courseseditor_extend_settings_navigation($settingsnav, $context) {
+function local_courseseditor_extend_settings_navigation($settingsnav, $context)
+{
 
 }
