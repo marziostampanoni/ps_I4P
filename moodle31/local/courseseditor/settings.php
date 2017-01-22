@@ -48,33 +48,48 @@ if ($hassiteconfig) {
    * Mail notification settings
    */
 
+    // notify manager by mail?
+    $config_name = 'local_courseseditor/notify_manager_by_mail';
+    $name = get_string('notify_manager_by_mail_name', 'local_courseseditor');
+    $description = get_string('notify_manager_by_mail_description', 'local_courseseditor');
+    $default = 1;
+    $notify_manager_by_mail_bool = new admin_setting_configcheckbox($config_name, $name, $description , $default);
+
     // mail address receiver
     $config_name = 'local_courseseditor/to_mail';
     $name = get_string('to_mail_name', 'local_courseseditor');
     $description = get_string('to_mail_description', 'local_courseseditor');
-    $default = 'rezart.lohja@student.supsi.ch,marzio.stampanoni@student.supsi.ch';
+    $default = 'CAT_MANAGER';
     $to_mail_text = new admin_setting_configtext($config_name, $name, $description , $default, PARAM_TEXT);
 
     // mail address sender
     $config_name = 'local_courseseditor/from_mail';
     $name = get_string('from_mail_name', 'local_courseseditor');
     $description = get_string('from_mail_description', 'local_courseseditor');
-    $default = 'moodle@moodle.moodle';
+    $default = 'CURRENT_USER';
     $from_mail_text = new admin_setting_configtext($config_name, $name, $description , $default, PARAM_TEXT);
 
-    // mail address receiver
+    // mail subject
     $config_name = 'local_courseseditor/subject_mail';
     $name = get_string('subject_mail_name', 'local_courseseditor');
     $description = get_string('subject_mail_description', 'local_courseseditor');
-    $default = 'Nuova richiesta modifiche corsi';
+    $default = get_string('new_request_subject', 'local_courseseditor');
     $subject_mail_text = new admin_setting_configtext($config_name, $name, $description , $default, PARAM_TEXT);
 
-    // mail address receiver
+    // mail message
     $config_name = 'local_courseseditor/message_mail';
     $name = get_string('message_mail_name', 'local_courseseditor');
     $description = get_string('message_mail_description', 'local_courseseditor');
-    $default = 'Ci sono nuove richiesti di modifiche corsi su moodle.';
-    $message_mail_text = new admin_setting_configtext($config_name, $name, $description , $default, PARAM_TEXT);
+    $default = get_string('new_request_message', 'local_courseseditor');
+    $message_mail_text = new admin_setting_configtextarea($config_name, $name, $description , $default);
+
+
+    // notify user by mail?
+    $config_name = 'local_courseseditor/notify_user_by_mail';
+    $name = get_string('notify_user_by_mail_name', 'local_courseseditor');
+    $description = get_string('notify_user_by_mail_description', 'local_courseseditor');
+    $default = 1;
+    $notify_user_by_mail_bool = new admin_setting_configcheckbox($config_name, $name, $description , $default);
 
     /*
      * Compose the settings page
@@ -83,8 +98,12 @@ if ($hassiteconfig) {
     $settings->add($plugin_header);
     $settings->add($supsi_host_text);
     $settings->add($usi_host_text);
+    $settings->add($notify_user_by_mail_bool);
+    $settings->add($notify_manager_by_mail_bool);
     $settings->add($to_mail_text);
     $settings->add($from_mail_text);
     $settings->add($subject_mail_text);
     $settings->add($message_mail_text);
+
+
 }

@@ -26,8 +26,8 @@ $string['resume_comments'] = 'Comments';
 $string['resume_comment_placeholder'] = 'Add comment to your submission..';
 $string['resume_next'] = 'Submit request';
 $string['resume_tablehead_actions'] = 'Action';
-$string['resume_page_success'] = '<strong>Success!</strong> Request inserted successfully.';
-$string['resume_page_error'] = '<strong>Danger!</strong> There was an error.';
+$string['resume_page_success'] = 'Request inserted successfully.';
+$string['resume_page_error'] = 'There was an error.';
 
 
 $string['manage_page_title'] = 'Manage requests';
@@ -63,13 +63,20 @@ $string['usi_host_description'] = 'The address of the USI web service';
 $string['supsi_host_name'] = 'SUPSI Host';
 $string['supsi_host_description'] = 'The address of the SUPSI web service';
 $string['to_mail_name'] = 'Mail To';
-$string['to_mail_description'] = 'The e-mail address to send the notification';
+$string['to_mail_description'] = 'The e-mail address to send the notification (CAT_MANAGER => The mail of category manager)';
 $string['from_mail_name'] = 'Mail from';
-$string['from_mail_description'] = 'The e-mail address that sends the notification';
+$string['from_mail_description'] = 'The e-mail address that sends the notification (CURRENT_USER => The mail of the current logged user)';
 $string['subject_mail_name'] = 'Mail subject';
 $string['subject_mail_description'] = 'The subject of the mail';
 $string['message_mail_name'] = 'Mail message';
 $string['message_mail_description'] = 'The message to send by mail';
+$string['new_request_subject'] = 'Moodle: New request in Courses editor';
+$string['new_request_message'] = 'There are new requests in Courses Editor';
+$string['notify_manager_by_mail_name'] = 'Notify to manager by mail';
+$string['notify_manager_by_mail_description'] = 'Select if you want to notify by mail request to the manager.';
+$string['notify_user_by_mail_name'] = 'Notify to the user by mail';
+$string['notify_user_by_mail_description'] = 'Select if you want to notify by mail the updates to the user.';
+
 
 // Nuovo
 

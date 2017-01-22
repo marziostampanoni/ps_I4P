@@ -29,18 +29,26 @@ if ($fromform = $form->get_data()) {
 $resumeForm = new FormResume(null, array('data' => $data));
 //unset($_SESSION['courses_to_insert']);
 if ($fromform = $resumeForm->get_data()) {
+    if($_SESSION['just_saved']){
+        redirect(new moodle_url($CFG->wwwroot . '/local/courseseditor/start.php'));
+    }
 
     $data = CEUtil::getParsedDataFromFormResume($_POST);
+    $id_cats_to_notify=array();
     if (count($data['corsi'] > 0)) {
         $r = new Richiesta();
         $r->setIdMdlUser($USER->id);
         foreach ($data['corsi'] as $corso) {
+
+            $id_cats_to_notify[]=$corso['categoria'];
+
             $c = new Corso();
             $c->setIdMdlCourseCategories($corso['categoria']);
             $c->setNote($corso['note']);
             $c->setStatoRichiesta(STATO_RICHIESTA_DA_GESTIRE);
             $c->setTipoRichiesta(TIPO_RICHIESTA_INSERIRE);
             $c->setTitolo($corso['titolo']);
+            $c->setShortname($corso['shortname']);
 
             if ($corso['teachers'] && count($corso['teachers']) > 0) {
                 foreach ($corso['teachers'] as $teacher) {
@@ -72,7 +80,13 @@ if ($fromform = $resumeForm->get_data()) {
 
 
         if ($r->saveToDB()) {
-            CEUtil::mailNotificationToManager();
+            $_SESSION['just_saved']=true;
+
+            if(get_config('local_courseseditor','notify_manager_by_mail')==1){
+                foreach ($id_cats_to_notify as $id_cat){
+                    if(CEUtil::mailNotificationToManager($id_cat));
+                }
+            }
             echo '<div class="alert alert-success">
                     ' . get_string('resume_page_success', 'local_courseseditor') . '
                 </div>';
@@ -86,6 +100,7 @@ if ($fromform = $resumeForm->get_data()) {
     }
 
 } else {
+    $_SESSION['just_saved']=false;
     $resumeForm->display();
 }
 ?>
