@@ -7,7 +7,6 @@
  * Time: 09:05
  */
 
-require_once "WebServices.php";
 class SupsiWebServices extends WebServices
 {
 

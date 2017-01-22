@@ -7,7 +7,6 @@
  * Time: 09:05
  */
 
-require_once "WebServices.php";
 class UsiWebServices extends WebServices
 {
 

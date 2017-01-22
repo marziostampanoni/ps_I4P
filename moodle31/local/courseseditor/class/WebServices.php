@@ -6,7 +6,7 @@
  * Date: 15.01.17
  * Time: 09:05
  */
-require_once "WebServicesInterface.php";
+
 abstract class WebServices implements WebServicesInterface
 {
     var $url;

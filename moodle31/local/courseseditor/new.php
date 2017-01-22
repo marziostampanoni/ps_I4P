@@ -1,12 +1,5 @@
 <?php
-require_once('../../config.php');
-require_once('form/addnewcourse.php');
-require_once('form/searchcoursesws.php');
-require_once('form/selectcorses.php');
-require_once('class/SupsiWebServices.php');
-require_once('class/UsiWebServices.php');
-require_once('class/Richiesta.php');
-require_once('class/Corso.php');
+require_once('include_all.php');
 
 
 $PAGE->set_context(get_system_context());

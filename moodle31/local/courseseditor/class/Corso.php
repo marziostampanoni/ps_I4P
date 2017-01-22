@@ -6,8 +6,6 @@
  * Time: 09:47
  */
 
-require_once 'UserCorso.php';
-
 define("TIPO_RICHIESTA_INSERIRE", "Inserire");
 define("TIPO_RICHIESTA_CLONARE", "Clonare");
 define("TIPO_RICHIESTA_CANCELLARE", "Cancellare");
@@ -90,14 +88,10 @@ class Corso
 
             // inserisco solo se almeno un user assegnato e c'� la relazione con la richiesta
             if ( $this->id_lcl_courseseditor_richiesta>0) {
-//count($this->user_assegnati) > 0
 
                 $r->stato_richiesta = STATO_RICHIESTA_DA_GESTIRE;
-               // var_dump($r);
                 $lastinsertid = $DB->insert_record('lcl_courseseditor_corso', $r, true);
-                //echo $DB->get_last_error();
-                //echo 'ciao'.$this->id_lcl_courseseditor_richiesta.$lastinsertid;
-                if ($lastinsertid) {// se inserimento andato bene allora inserisco i corsi
+                if ($lastinsertid && is_array($this->user_assegnati)) {// se inserimento andato bene allora inserisco i corsi
                     foreach ($this->user_assegnati as $user) {
 
                         $user->setIdLclCourseseditorCorso($lastinsertid);

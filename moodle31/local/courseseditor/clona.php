@@ -2,9 +2,7 @@
 
 
 // The number of lines in front of config file determine the // hierarchy of files.
-require_once('../../config.php');
-require_once('form/clona.php');
-require_once('form/selectcat.php');
+require_once('include_all.php');
 
 
 

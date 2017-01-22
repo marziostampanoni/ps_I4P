@@ -2,12 +2,7 @@
 
 
 // The number of lines in front of config file determine the // hierarchy of files.
-require_once('../../config.php');
-require_once('form/cancella.php');
-require_once('form/selectcat.php');
-require_once('class/Richiesta.php');
-require_once('class/Corso.php');
-require_once('class/UserCorso.php');
+rrequire_once('include_all.php');
 
 global $PAGE, $DB, $USER;
 

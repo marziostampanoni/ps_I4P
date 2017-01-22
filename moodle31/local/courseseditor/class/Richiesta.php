@@ -1,5 +1,4 @@
 <?php
-require_once "Corso.php";
 /**
  * Created by PhpStorm.
  * User: Rezart Lohja

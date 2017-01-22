@@ -27,5 +27,10 @@ $CFG->directorypermissions = 0777;
 
 require_once(dirname(__FILE__) . '/lib/setup.php');
 
+@error_reporting(E_ALL & ~E_NOTICE);
+@ini_set('display_errors', '1');
+$CFG->debug = (E_ALL & ~E_NOTICE);
+$CFG->debugdisplay = 1;
+
 // There is no php closing tag in this file,
 // it is intentional because it prevents trailing whitespace problems!

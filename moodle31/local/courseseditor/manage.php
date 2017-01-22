@@ -2,9 +2,7 @@
 
 
 // The number of lines in front of config file determine the // hierarchy of files.
-require_once('../../config.php');
-require_once('form/manage.php');
-require_once('form/selectuser.php');
+require_once('include_all.php');
 
 $PAGE->set_context(get_system_context());
 $PAGE->set_pagelayout('admin');
