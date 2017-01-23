@@ -34,6 +34,10 @@ class Corso
         $this->id=$id;
     }
 
+    /**
+     * Load ogject Corso from database
+     * @return bool
+     */
     public function loadFromDB(){
         global $DB;
         if($this->id>0){
@@ -56,12 +60,12 @@ class Corso
                     }
                     $this->addUser($c);
                 }
-
-            }
+                return true;
+            }else return false;
         }else return false;
     }
     /**
-     * Salva su DB il corso
+     * Save on database this object Corso
      */
     public function saveToDB()
     {

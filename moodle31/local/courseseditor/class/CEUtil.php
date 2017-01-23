@@ -114,10 +114,27 @@ class CEUtil
                 return $arr;
             }
         }
+    }
 
+    /**
+     * Return true if the user with id passed is a manager of any context
+     * @param $id
+     * @return bool
+     */
+    static function isManager($id){
+        global $DB;
 
+        $query = "SELECT *
+                  FROM mdl_role_assignments as a 
+                    INNER JOIN mdl_role as r ON (a.roleid=r.id AND r.shortname='manager')
+                  WHERE userid = {$id};";
 
+        $rs = $DB->get_recordset_sql( $query );
 
+        if($rs->valid()) {
+            return true;
+        }
+        return false;
     }
 
 

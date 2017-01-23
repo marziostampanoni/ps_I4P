@@ -33,7 +33,7 @@ echo "<hr>";
         $data->idnull;
         $data->title =  $fromform->title . ", " . $fromform->code;
         $data->cat = $fromform->category;
-        $data->shortdesc = $fromform->code;
+        $data->shortname = $fromform->code;
         $data->teachers = null;
         $data->editingteacher = null;
 
