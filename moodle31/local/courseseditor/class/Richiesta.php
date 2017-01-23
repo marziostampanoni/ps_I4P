@@ -34,7 +34,7 @@ class Richiesta
     }
 
     /**
-     * Carica l'oggetto dal data base riferendosi all'id che deve essere settato prima
+     * Load from Database the object searching by id
      * @return bool
      */
     public function loadFromDB(){
@@ -59,7 +59,7 @@ class Richiesta
     }
 
     /**
-     * Salva su DB la richiesta
+     * Save to DataBase this object
      */
     public function saveToDB()
     {
@@ -88,8 +88,8 @@ class Richiesta
                     }
                 }
             }
+            return true;
         } else return false;
-        return true;
     }
 
     /**

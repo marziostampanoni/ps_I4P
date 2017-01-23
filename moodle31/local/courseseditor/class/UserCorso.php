@@ -33,6 +33,7 @@ class UserCorso
                $DB->insert_record('lcl_courseseditor_corso_user', $r, false);
             }else return false;
         }
+        return true;
     }
 
     /**
