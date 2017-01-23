@@ -59,10 +59,10 @@ class FormCancella extends moodleform
                     }
                 }
             }
-
-            $this->add_action_buttons(false, get_string("delete_next", 'local_courseseditor'));
-            //$form->addElement('button', 'next', get_string("delete_next", 'local_courseseditor'), array('data-toggle' => 'modal', 'data-target' => '#deleteModal'));
-            $form->closeHeaderBefore('next');
+            $group = array();
+            $group[] = &$form->createElement('button', 'next', get_string("delete_next", 'local_courseseditor'), array('data-toggle' => 'modal', 'data-target' => '#deleteModal'));
+            $form->addGroup($group, 'buttonar', '', array(' '), false);
+            $form->closeHeaderBefore('buttonar');
         }
     }
 }

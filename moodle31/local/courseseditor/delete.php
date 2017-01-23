@@ -2,7 +2,7 @@
 
 
 // The number of lines in front of config file determine the // hierarchy of files.
-rrequire_once('include_all.php');
+require_once('include_all.php');
 
 global $PAGE, $DB, $USER;
 
@@ -61,7 +61,7 @@ foreach ($req as $idReq => $request) {
 
 
 // create checkbox form form courses to delete
-$form = new FormCancella(new moodle_url($CFG->wwwroot . '/local/courseseditor/cancella.php'), array('courses' => $courses), 'post', '', array('id' => 'deleteForm'));
+$form = new FormCancella(new moodle_url($CFG->wwwroot . '/local/courseseditor/delete.php'), array('courses' => $courses), 'post', '', array('id' => 'deleteForm'));
 
 // if result create new request in $DB and redirect to start
 if ($fromform = $form->get_data()) {

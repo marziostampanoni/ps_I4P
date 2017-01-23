@@ -18,9 +18,9 @@ require_once('class/UsiWebServices.php');
 require_once('class/CEUtil.php');
 
 //form
-require_once('form/cancella.php');
+require_once('form/delete.php');
 require_once('form/selectcat.php');
-require_once('form/clona.php');
+require_once('form/clone.php');
 require_once('form/manage.php');
 require_once('form/selectuser.php');
 require_once('form/addnewcourse.php');

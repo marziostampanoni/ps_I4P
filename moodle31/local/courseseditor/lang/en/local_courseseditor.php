@@ -45,6 +45,9 @@ $string['manage_filter_nouserselected'] = 'All users';
 $string['manage_reject_req'] = 'Reject Request';
 $string['manage_save_req'] = 'Save Request';
 $string['manage_cancel_req'] = 'Cancel Request';
+$string['manage_enroll_user'] = 'Enroll Teacher/Assistant';
+$string['manage_enroll_button'] = 'Enroll';
+$string['manage_unenroll_button'] = 'Unenroll';
 
 $string['delete_page_title'] = 'Delete existing courses';
 $string['delete_next'] = 'Delete selection';
