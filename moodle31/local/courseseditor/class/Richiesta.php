@@ -20,6 +20,10 @@ class Richiesta
      */
     var $data_richiesta;
     /**
+     * @var note sulla richiesta
+     */
+    var $note;
+    /**
      * @var Corso[] con gli oggetti Corso che fanno parte di questa richiesta
      */
     var $corsi_richiesti;
@@ -44,6 +48,7 @@ class Richiesta
             if($res){
                 $this->setDataRichiesta($res->data_richiesta);
                 $this->setIdMdlUser($res->id_mdl_user);
+                $this->setNote($res->note);
                 // carico i corsi richiesti per questa richiesta da DB
                 $corsi = $DB->get_records('lcl_courseseditor_corso', array('id_lcl_courseseditor_richiesta'=>$this->id));
 
@@ -68,6 +73,7 @@ class Richiesta
             $r = new stdClass();
             $r->id_mdl_user = $this->id_mdl_user;
             $r->data_richiesta = time();
+            $r->note = $this->note;
 
             if($this->id>0){// update
                 $r->id=$this->id;
@@ -145,6 +151,22 @@ class Richiesta
     public function setDataRichiesta($data_richiesta)
     {
         $this->data_richiesta = $data_richiesta;
+    }
+
+    /**
+     * @return note
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
+     * @param note $note
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
     }
 
     /**
