@@ -52,7 +52,7 @@ class FormResume extends moodleform
             $i++;
         }
 
-        $form->addElement('textarea', 'comments', get_string("resume_comments", "local_courseseditor"), 'rows="5" cols="80" style="resize:none; margin-left:2%;" placeholder="' . get_string('resume_comment_placeholder', 'local_courseseditor') . '"');
+        $form->addElement('textarea', 'note', get_string("resume_comments", "local_courseseditor"), 'rows="5" cols="80" style="resize:none; margin-left:2%;" placeholder="' . get_string('resume_comment_placeholder', 'local_courseseditor') . '"');
         $form->addElement('submit', 'insert', get_string('resume_next', 'local_courseseditor'));
 
 //        } else {

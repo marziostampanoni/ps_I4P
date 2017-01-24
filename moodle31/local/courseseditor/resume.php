@@ -33,6 +33,7 @@ if ($fromform = $resumeForm->get_data()) {
     if (count($data['corsi'] > 0)) {
         $r = new Richiesta();
         $r->setIdMdlUser($USER->id);
+        $r->setNote($data['note']);
         foreach ($data['corsi'] as $corso) {
 
             $id_cats_to_notify[]=$corso['categoria'];
