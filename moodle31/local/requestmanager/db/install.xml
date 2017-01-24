@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/requestmanager/db" VERSION="20170124" COMMENT="XMLDB file for Moodle local/requestmanager"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="requestmanager_richiesta" COMMENT="Tabella contenente le richieste di modifica corsi fatte dai docenti">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="id_mdl_user" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="Id dell'utente iCorsi che ha fatto la richiesta"/>
+        <FIELD NAME="data_richiesta" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false" COMMENT="Data timestamp che è stata fatta la richiesta"/>
+        <FIELD NAME="note" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Note"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="id_mdl_user" TYPE="foreign" FIELDS="id_mdl_user" REFTABLE="mdl_user" REFFIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="requestmanager_corso" COMMENT="Corsi per i quali si richiede una modifica">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="id_requestmanager_richiesta" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="Relazione con la richiesta alla quale appartiene"/>
+        <FIELD NAME="titolo" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="Titolo del corso"/>
+        <FIELD NAME="shortname" TYPE="char" LENGTH="30" NOTNULL="false" SEQUENCE="false" COMMENT="Codice corto che si da a un corso"/>
+        <FIELD NAME="id_mdl_course_categories" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="Categoria alla quale appartiene il corso"/>
+        <FIELD NAME="id_mdl_course" TYPE="int" LENGTH="11" NOTNULL="false" SEQUENCE="false" COMMENT="Relazione con corso moodle"/>
+        <FIELD NAME="note" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Note"/>
+        <FIELD NAME="tipo_richiesta" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Tipo di richiesta scelta tra (1) Inserire; (2) Clonare; (3)Cancellare"/>
+        <FIELD NAME="stato_richiesta" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="3" SEQUENCE="false" COMMENT="Stato della richiesta fatta per questo corso (1) Fatto; (2) Sospeso; (3) Dagestire"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="id_requestmanager_richiesta" TYPE="foreign" FIELDS="id_requestmanager_richiesta" REFTABLE="requestmanager_richiesta" REFFIELDS="id"/>
+        <KEY NAME="id_mdl_course_categories" TYPE="foreign" FIELDS="id_mdl_course_categories" REFTABLE="mdl_course_categories" REFFIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="requestmanager_corso_user" COMMENT="Docenti e assistenti del corso">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="id_requestmanager_corso" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="Relazione con il corso"/>
+        <FIELD NAME="tipo_relazione" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Tipo di relazione con il corso (1) Docente; (2) Assistente"/>
+        <FIELD NAME="nome" TYPE="char" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="cognome" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="id_mdl_user" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="Relazione con user di moodle"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="id_requestmanager_corso" TYPE="foreign" FIELDS="id_requestmanager_corso" REFTABLE="requestmanager_corso" REFFIELDS="id"/>
+        <KEY NAME="id_mdl_user" TYPE="foreign" FIELDS="id_mdl_user" REFTABLE="mdl_user" REFFIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
