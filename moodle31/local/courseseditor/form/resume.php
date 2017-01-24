@@ -36,14 +36,18 @@ class FormResume extends moodleform
             $form->addElement('html', '<tr>');
 
             $form->addElement('html', '<td style="border: none;padding: 0px 10px;"><label>' . get_string('resume_tablehead_teacher', 'local_courseseditor') . '</label><ul>');
-            foreach ($trdata->teacher as $option) {
-                $form->addElement('html', '<li value="' . $option->id . '" style="white-space: nowrap;">' . $option->name . '</li>');
+            if(is_array($trdata->teacher)) {
+                foreach ($trdata->teacher as $option) {
+                    $form->addElement('html', '<li value="' . $option->id . '" style="white-space: nowrap;">' . $option->name . '</li>');
+                }
             }
             $form->addElement('html', '</ul></td>');
 
             $form->addElement('html', '<td style="border: none; padding: 0px 10px;"><label>' . get_string('resume_tablehead_editingteacher', 'local_courseseditor') . '</label><ul>');
-            foreach ($trdata->editingteacher as $option) {
-                $form->addElement('html', '<li value="' . $option->id . '" style="white-space: nowrap;">' . $option->name . '</li>');
+            if(is_array($trdata->editingteacher)) {
+                foreach ($trdata->editingteacher as $option) {
+                    $form->addElement('html', '<li value="' . $option->id . '" style="white-space: nowrap;">' . $option->name . '</li>');
+                }
             }
             $form->addElement('html', '</ul></td>');
             $form->addElement('html', '</tr>');

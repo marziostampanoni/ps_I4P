@@ -9,6 +9,7 @@
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="id_mdl_user" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false" COMMENT="Id dell'utente iCorsi che ha fatto la richiesta"/>
         <FIELD NAME="data_richiesta" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false" COMMENT="Data timestamp che è stata fatta la richiesta"/>
+        <FIELD NAME="note" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Note"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
