@@ -7,7 +7,7 @@ class CEUtil
 {
     static function tipoRichiesta($integer){
         switch($integer){
-            case 1:return 'New';
+            case 1:return 'New course';
             case 2:return 'Clone';
             case 3:return 'Delete';
         }
@@ -18,6 +18,14 @@ class CEUtil
             case 1:return 'Done';
             case 2:return 'Suspended';
             case 3:return 'To do';
+        }
+    }
+
+    static function getStyleTipoRichiesta($integer){
+        switch($integer){
+            case 1:return 'success';
+            case 2:return 'info';
+            case 3:return 'warning';
         }
     }
 
@@ -86,8 +94,6 @@ class CEUtil
             $from = " '{$USER->firstname} {$USER->lastname}' <{$USER->email}>";
 
         }
-
-
 
         //MAIL_SUBJECT
         $subject = get_config('local_requestmanager','subject_mail');

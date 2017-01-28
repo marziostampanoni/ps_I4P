@@ -83,15 +83,15 @@ $string['notify_user_by_mail_description'] = 'Select if you want to notify by ma
 
 // Nuovo
 
-$string['String di ricerca'] = 'Search string...';
-$string['Solo corsi di'] = 'Only courses of';
+$string['search_string'] = 'Search string...';
 $string['Select courses'] = 'Select courses from USI/SUPSI database';
-$string['Altri corsi'] = 'Other courses';
-$string['Creazione nuovi corsi'] = 'Create new courses';
+$string['other_courses'] = 'Other courses';
+$string['new_course_creation'] = 'Create new courses';
 $string['add'] = 'Add';
-$string['Avanti'] = 'Next';
-$string['Titolo'] = 'Title';
-$string['Codice'] = 'Code';
-$string['Crea un corso che non esiste nei database ufficiale dei corsi USI/SUPSI'] = 'Create new course that does not exist in the database USI/SUPSI';
-$string['Aggiungi corso'] = 'Add course';
-$string['Corsi selezionati'] = 'Selected courses to create';
+$string['role'] = 'Role';
+$string['next'] = 'Next';
+$string['title'] = 'Title';
+$string['code'] = 'Code';
+$string['create_new_course_from_null'] = 'Create new course that does not exist in the database USI/SUPSI';
+$string['add_course'] = 'Add course';
+$string['selected_courses'] = 'Selected courses to create';

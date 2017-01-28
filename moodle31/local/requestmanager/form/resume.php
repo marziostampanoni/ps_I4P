@@ -39,6 +39,7 @@ class FormResume extends moodleform
             if(is_array($trdata->teachers)) {
                 foreach ($trdata->teachers as $option) {
                     $form->addElement('html', '<li class="teacher_' . $i. '" value="' . $option->id . '" style="white-space: nowrap;">' . $option->name . '</li>');
+                    $form->addElement('html', '<input type="hidden" value="' . $option->id . '" name="teachers-' . $i . '[]"');
                 }
             }
             $form->addElement('html', '</ul><button class="btn" onclick="enroll(\'' . $i. '\', \'1\');" data-toggle="modal" data-target="#enrollModal">Enroll</button></td>');
@@ -47,6 +48,7 @@ class FormResume extends moodleform
             if(is_array($trdata->editingteacher)) {
                 foreach ($trdata->editingteacher as $option) {
                     $form->addElement('html', '<li class="editingteacher_' . $i. '" value="' . $option->id . '" style="white-space: nowrap;">' . $option->name . '</li>');
+                    $form->addElement('html', '<input type="hidden" value="' . $option->id . '" name="editingteachers-' . $i . '[]"');
                 }
             }
             $form->addElement('html', '</ul><button class="btn" onclick="enroll(\'' . $i . '\', \'0\');" data-toggle="modal" data-target="#enrollModal">Enroll</button></td>');

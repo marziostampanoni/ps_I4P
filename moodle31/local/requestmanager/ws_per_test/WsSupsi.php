@@ -25,7 +25,7 @@ class WsSupsi implements Ws
     {
         $corsi_trovati=$this->data;
         $base_ricerca = $this->data;
-        if($netId){
+        if(!is_null($netId)){
             $corsi_trovati = array();
             foreach ($base_ricerca as $corso){
                 if(in_array($netId,$corso['docenti'])){

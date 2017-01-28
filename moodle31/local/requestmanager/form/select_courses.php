@@ -40,34 +40,36 @@ class FormSelectCourses extends moodleform
                             break;
                         case 'docenti':
                             foreach ($valore as $docente) {
-                                if ($docente == $USER->username) $ruoli[] = TIPO_RELAZIONE_DOCENTE;
+                                if ($docente == $USER->username) $ruoli[] = \local_requestmanager\CEUtil::tipoUtente(TIPO_RELAZIONE_DOCENTE);
                                 break;
                             }
                             break;
                         case 'assistenti':
                             foreach ($valore as $docente) {
-                                if ($docente == $USER->username) $ruoli[] = TIPO_RELAZIONE_ASSISTENTE;
+                                if ($docente == $USER->username) $ruoli[] = \local_requestmanager\CEUtil::tipoUtente(TIPO_RELAZIONE_ASSISTENTE);
                                 break;
                             }
                             break;
                     }
                 }
-                $details = "<b> $titolo</b>$facolta$cdl$modulo$dip" . ($ruoli ? ', Ruolo: ' . implode(',', $ruoli) : '');
+                $details = "<b> $titolo</b>$facolta$cdl$modulo$dip" . ($ruoli ? ', '.get_string('role','local_requestmanager').': ' . implode(',', $ruoli) : '');
 
                 $form->addElement('checkbox', 'name-' . $i, '', $details, array('value' => 'asd'), array('value' => 'asdfghj'));
+                $user = new stdClass();
+                $user->id=$USER->id;
+                $user->name=$USER->firstname.' '.$USER->lastname ;
+
                 $data = array('id' => null,
                     'title' => "$titolo$facolta$cdl$modulo$dip",
                     'cat' => null,
                     'teachers' => null,
-                    'editingteacher' => null
+                    'editingteacher' => array($user)
                 );
                 $form->addElement('hidden', 'data-' . $i, json_encode($data));
                 $i++;
             }
         }
-
-        //$form->addElement('submit', 'submit_selectcorsi', get_string('Avanti','local_requestmanager'), array('style' => 'width:100px;'));
-        $this->add_action_buttons(false,get_string('Avanti','local_requestmanager'));
+        $this->add_action_buttons(false,get_string('next','local_requestmanager'));
     }
 
 }
