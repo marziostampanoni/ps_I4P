@@ -11,13 +11,13 @@ $PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/requestmanager/js/ma
 require_login();
 
 echo $OUTPUT->header();
-echo('<h2 style="">'.get_string('new_course_creation', 'local_requestmanager').'</h2>');
+echo('<h2 style="">'.get_string('course_creation', 'local_requestmanager').'</h2>');
 
 echo "<hr>";
 
 unset($_SESSION['courses_to_insert']);
 
-echo '<span class="nowrap" style="font-size: 18px;"> ' . get_string('create_new_course_from_null', 'local_requestmanager') . '   <a class="btn btn-primary" href="newadd.php">' . get_string('next', 'local_requestmanager') . '</a></span>';
+echo '<span class="nowrap" style="font-size: 18px;"> ' . get_string('create_new_course_from_null', 'local_requestmanager') . ':  <a class="btn btn-primary" href="newadd.php">' . get_string('next', 'local_requestmanager') . '</a></span>';
 
 
 echo "<div style='margin: 10px 0px;'>OR</div>";
@@ -46,6 +46,8 @@ $form_select_corsi = new FormSelectCourses('newadd.php', array('corsi' => $resul
 echo '<h4>' . get_string('Select courses', 'local_requestmanager') . '</h4>';
 
 $form_cerca->display();
+
+if(!is_null($filter_cerca))echo '<div style="width: 100%;text-align: center;"><a class="btn btn-info" href="new.php">' . get_string('reset_filter', 'local_requestmanager') . '</a></div>';
 
 $form_select_corsi->display();
 

@@ -78,14 +78,11 @@ if (isset($_GET['updateEnroll']) && $_GET['updateEnroll'] != '') {
 $resumeForm = new FormResume(null, array('data' => $data));
 
 if (!isset($_GET['updateEnroll']) && $fromform = $resumeForm->get_data()) {
-//    if($_SESSION['just_saved']){
-//        redirect(new moodle_url($CFG->wwwroot . '/local/requestmanager/start.php'));
-//    }
+    if($_SESSION['just_saved']){
+        redirect(new moodle_url($CFG->wwwroot . '/local/requestmanager/start.php'));
+    }
 
     $data = local_requestmanager\CEUtil::getParsedDataFromFormResume($_POST);
-    echo '<pre>';
-    var_dump($data);
-    echo '</pre>';
     $id_cats_to_notify=array();
     if (count($data['corsi'] > 0)) {
         $r = new local_requestmanager\Richiesta();
@@ -150,7 +147,7 @@ if (!isset($_GET['updateEnroll']) && $fromform = $resumeForm->get_data()) {
                 </div>';
         }
         echo '<br><a type="button" class="btn btn-primary btn-lg" href="manage.php">' . get_string('manage_courses', 'local_requestmanager') . '</a>';
-        echo '  <a type="button" class="btn btn-info btn-lg" href="start.php">' . get_string('pluginname', 'local_requestmanager') . '</a>';
+        echo '  <a type="button" class="btn btn-info btn-lg" href="start.php">' . get_string('plugin_home', 'local_requestmanager') . '</a>';
     }
 
 } else {

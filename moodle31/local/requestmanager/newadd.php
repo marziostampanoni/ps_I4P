@@ -15,18 +15,21 @@ echo('<h2 style="">'.get_string('new_course_creation', 'local_requestmanager').'
 
 echo "<hr>";
 
+//delete course from session
+if(isset($_GET['delete'])){
+    unset($_SESSION['courses_to_insert'][$_GET['delete']]);
+}
 
 $form_select_corsi = new FormSelectCourses();
 
-
+// save in session courses selected from usi/supsi
 if ($fromform = $form_select_corsi->get_data()) {
-
     $_SESSION['courses_to_insert'] = local_requestmanager\CEUtil::getParsedDataFromForm($_POST);
 }
 
 $form_add = new FormAddNewCourse();
 
-
+// add in session the new course added
 if ($fromform = $form_add->get_data()) {
 
     $data = new stdClass();
@@ -54,13 +57,18 @@ if(count($_SESSION['courses_to_insert'])>0) {
 }
 
 echo "<p>". get_string('create_new_course_from_null','local_requestmanager')."</p>";
+$se = new stdClass();
+$se->title=null;
+$se->code=null;
+$se->category=null;
+$form_add->set_data(array($se));
 $form_add->display();
 echo "<hr>";
 if(count($_SESSION['courses_to_insert'])>0) {
     echo '<h4>' . get_string('selected_courses', 'local_requestmanager') . '</h4>';
     echo "<ul>";
-    foreach ($_SESSION['courses_to_insert'] as $data) {
-        echo " <li> " . $data->title . "</li>";
+    foreach ($_SESSION['courses_to_insert'] as $id=>$data) {
+        echo " <li> " . $data->title . '   <a class="red" href="newadd.php?delete='.$id.'">'.get_string('delete','local_requestmanager').'</a></li>';
     }
     echo "</ul>";
     echo '<br><a type="button" class="btn btn-primary btn-lg" href="resume.php">'.get_string('next','local_requestmanager').'</a>';

@@ -19,13 +19,10 @@ class FormManage extends moodleform
             foreach ($this->_customdata['users'] as $userId => $requests) {
                 if(is_array($requests)) {
                     $user = $DB->get_record('user',array('id'=>$userId));
-                    $form->addElement('html', '<h4>' . get_string('manage_request_user', 'local_requestmanager') . ': ' . $user->email . '</h4>');
+                    $form->addElement('html', '<h4>' . get_string('manage_request_user', 'local_requestmanager') . " : {$user->firstname} {$user->lastname} ({$user->email})</h4>" );
                     foreach ($requests as $request) {
 
                         foreach ($request->corsi_richiesti as $corso) {
-//                            echo '<pre>';
-//                            var_dump($corso);
-//                            echo '</pre>';
                             if (!is_siteadmin($USER->id)) {
                                 $action = 'savereq';
                                 $string = 'manage_save_req';

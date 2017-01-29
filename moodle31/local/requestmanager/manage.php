@@ -102,7 +102,7 @@ foreach ($res as $request) {
 }
 //echo '</pre>';
 
-$select = new FormSelectUser(null, array('users' => $users));
+$select = new FormSearchRequests(null, array('users' => $users));
 
 if ($fromform = $select->get_data()) {
     if ($fromform->user != 0) {

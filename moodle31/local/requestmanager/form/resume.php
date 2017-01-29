@@ -10,7 +10,7 @@ class FormResume extends moodleform
         global $DB;
         $form = $this->_form;
 
-        //if (count($this->_customdata['data'])) {
+        if (count($this->_customdata['data'])) {
         $eachCat = coursecat::make_categories_list();
 
 
@@ -35,14 +35,6 @@ class FormResume extends moodleform
             $form->addElement('html', '</tr>');
             $form->addElement('html', '<tr>');
 
-            $form->addElement('html', '<td style="border: none;padding: 0px 10px;"><label>' . get_string('resume_tablehead_teacher', 'local_requestmanager') . '</label><ul id="teachers_list_' . $i . '">');
-            if(is_array($trdata->teachers)) {
-                foreach ($trdata->teachers as $option) {
-                    $form->addElement('html', '<li class="teacher_' . $i. '" value="' . $option->id . '" style="white-space: nowrap;">' . $option->name . '</li>');
-                    $form->addElement('html', '<input type="hidden" value="' . $option->id . '" name="teachers-' . $i . '[]"');
-                }
-            }
-            $form->addElement('html', '</ul><button class="btn" onclick="enroll(\'' . $i. '\', \'1\');" data-toggle="modal" data-target="#enrollModal">Enroll</button></td>');
 
             $form->addElement('html', '<td style="border: none; padding: 0px 10px;"><label>' . get_string('resume_tablehead_editingteacher', 'local_requestmanager') . '</label><ul id="editingteachers_list_' . $i . '">');
             if(is_array($trdata->editingteacher)) {
@@ -52,18 +44,26 @@ class FormResume extends moodleform
                 }
             }
             $form->addElement('html', '</ul><button class="btn" onclick="enroll(\'' . $i . '\', \'0\');" data-toggle="modal" data-target="#enrollModal">Enroll</button></td>');
+
+            $form->addElement('html', '<td style="border: none;padding: 0px 10px;"><label>' . get_string('resume_tablehead_teacher', 'local_requestmanager') . '</label><ul id="teachers_list_' . $i . '">');
+            if(is_array($trdata->teachers)) {
+                foreach ($trdata->teachers as $option) {
+                    $form->addElement('html', '<li class="teacher_' . $i. '" value="' . $option->id . '" style="white-space: nowrap;">' . $option->name . '</li>');
+                    $form->addElement('html', '<input type="hidden" value="' . $option->id . '" name="teachers-' . $i . '[]"');
+                }
+            }
+            $form->addElement('html', '</ul><button class="btn" onclick="enroll(\'' . $i. '\', \'1\');" data-toggle="modal" data-target="#enrollModal">Enroll</button></td>');
+
             $form->addElement('html', '</tr>');
             $form->addElement('html', '</table>');
             $form->addElement('html', '</div>');
             $i++;
         }
-
-        $form->addElement('textarea', 'note', get_string("resume_comments", "local_requestmanager"), 'rows="5" cols="80" style="resize:none; margin-left:2%;" placeholder="' . get_string('resume_comment_placeholder', 'local_requestmanager') . '"');
         $form->addElement('submit', 'insert', get_string('resume_next', 'local_requestmanager'));
 
-//        } else {
-//            $form->addElement('html','No requests');
-//        }
+        } else {
+            $form->addElement('html','No requests');
+        }
 
     }
 }
