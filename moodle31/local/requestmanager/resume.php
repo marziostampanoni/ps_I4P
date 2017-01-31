@@ -9,10 +9,10 @@ $PAGE->set_pagelayout('admin');
 $PAGE->set_title(get_string('pluginname', 'local_requestmanager'));
 $PAGE->set_heading(get_string('heading', 'local_requestmanager'));
 $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/local/requestmanager/js/main.js'));
-require_login();
 
 echo $OUTPUT->header();
 echo('<h2>' . get_string('resume_page_title', 'local_requestmanager') . '</h2><br><div>');
+require_once('check_capabilities.php');
 $form = new FormClona();
 
 if ($fromform = $form->get_data()) {
@@ -38,7 +38,6 @@ if (isset($_GET['updateEnroll']) && $_GET['updateEnroll'] != '') {
     // aggiunta degli user
     foreach ($ids as $id) {
         if($id!='') {
-            echo '<br> ---- ';
             $res = $DB->get_record('user', array('id' => $id));
 
             $usr = new stdClass();
@@ -91,7 +90,6 @@ if (!isset($_GET['updateEnroll']) && $fromform = $resumeForm->get_data()) {
         foreach ($data['corsi'] as $corso) {
 
             $id_cats_to_notify[]=$corso['categoria'];
-
             $c = new local_requestmanager\Corso();
             $c->setIdMdlCourseCategories($corso['categoria']);
             $c->setNote($corso['note']);
@@ -99,6 +97,7 @@ if (!isset($_GET['updateEnroll']) && $fromform = $resumeForm->get_data()) {
             $c->setTipoRichiesta(($_SESSION['tipo_richiesta']==TIPO_RICHIESTA_CLONARE?TIPO_RICHIESTA_CLONARE:TIPO_RICHIESTA_INSERIRE));
             $c->setTitolo($corso['titolo']);
             $c->setShortname($corso['shortname']);
+            if($corso['id']!='')$c->setIdMdlCourse($corso['id']);
 
             if ($corso['teachers'] && count($corso['teachers']) > 0) {
                 foreach ($corso['teachers'] as $teacher) {
@@ -129,10 +128,8 @@ if (!isset($_GET['updateEnroll']) && $fromform = $resumeForm->get_data()) {
         }
 
         unset($_SESSION['tipo_richiesta']);
-
         if ($r->saveToDB()) {
             $_SESSION['just_saved']=true;
-
             if(get_config('local_requestmanager','notify_manager_by_mail')==1){
                 foreach ($id_cats_to_notify as $id_cat){
                     if(local_requestmanager\CEUtil::mailNotificationToManager($id_cat));

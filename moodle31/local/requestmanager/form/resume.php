@@ -17,6 +17,7 @@ class FormResume extends moodleform
         $i = 0;
         foreach ($this->_customdata['data'] as $trdata) {
             $form->addElement('html', '<div class="block form-group">');
+            $form->addElement('html', '<input type="hidden" value="' . $trdata->id . '" name="id-' . $i . '">');
             $form->addElement('html', '<table class="table">');
             $form->addElement('html', '<tr>');
             $form->addElement('html', '<td colspan="2" style="width: 70%; border: none;padding: 0px 10px;"> <label>' . get_string('resume_tablehead_title', 'local_requestmanager') . '</label>');
@@ -49,7 +50,7 @@ class FormResume extends moodleform
             if(is_array($trdata->teachers)) {
                 foreach ($trdata->teachers as $option) {
                     $form->addElement('html', '<li class="teacher_' . $i. '" value="' . $option->id . '" style="white-space: nowrap;">' . $option->name . '</li>');
-                    $form->addElement('html', '<input type="hidden" value="' . $option->id . '" name="teachers-' . $i . '[]"');
+                    $form->addElement('html', '<input type="hidden" value="' . $option->id . '" name="teachers-' . $i . '[]">');
                 }
             }
             $form->addElement('html', '</ul><button class="btn" onclick="enroll(\'' . $i. '\', \'1\');" data-toggle="modal" data-target="#enrollModal">Enroll</button></td>');

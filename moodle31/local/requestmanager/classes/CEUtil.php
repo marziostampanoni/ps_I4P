@@ -16,7 +16,7 @@ class CEUtil
     static function statoRichiesta($integer){
         switch($integer){
             case 1:return 'Done';
-            case 2:return 'Suspended';
+            case 2:return 'Rejected';
             case 3:return 'To do';
         }
     }
@@ -75,25 +75,18 @@ class CEUtil
     static function mailNotificationToManager($id_category)
     {
         global $USER;
-        // MAIL_TO  if there is a mail to use in the config I use it els I search the managers of the category
-        if (get_config('local_requestmanager', 'to_mail') != 'CAT_MANAGER'){
-            $to = get_config('local_requestmanager', 'to_mail');
-        }else{
-            $users_to_notify = CEUtil::getCategoryManager($id_category);
-            $to = array();
-            foreach ($users_to_notify as $user){
-                $to[] = $user->email;
-            }
-            $to = implode(',',$to);
+
+        $users_to_notify = CEUtil::getCategoryManager($id_category);
+        $to = array();
+        foreach ($users_to_notify as $user){
+            $to[] = $user->email;
         }
+        $to=array_unique($to);
+        $to = implode(',',$to);
+
 
         //MAIL FROM
-        if(get_config('local_requestmanager','from_mail')!='CURRENT_USER'){
-            $from=get_config('local_requestmanager','from_mail');
-        }else{
-            $from = " '{$USER->firstname} {$USER->lastname}' <{$USER->email}>";
-
-        }
+        $from = " '{$USER->firstname} {$USER->lastname}' <{$USER->email}>";
 
         //MAIL_SUBJECT
         $subject = get_config('local_requestmanager','subject_mail');
@@ -144,7 +137,7 @@ class CEUtil
 
     /**
      * Return true if the user with id passed is a manager of any context
-     * @param $id
+     * @param $id Id user to check
      * @return bool
      */
     static function isManager($id){
@@ -163,6 +156,26 @@ class CEUtil
         return false;
     }
 
+    /**
+     * Return true if the user with passed id is a teacher or editingteacher
+     * @param $id Id user to check
+     * @return bool
+     */
+    static function isTeacherOrAssistant($id){
+        global $DB;
+
+        $query = "SELECT *
+                  FROM mdl_role_assignments as a 
+                    INNER JOIN mdl_role as r ON (a.roleid=r.id AND (r.shortname='teacher' OR r.shortname='editingteacher'))
+                  WHERE userid = {$id};";
+
+        $rs = $DB->get_recordset_sql( $query );
+
+        if($rs->valid()) {
+            return true;
+        }
+        return false;
+    }
 
 
 }

@@ -5,7 +5,7 @@ $string['plugin_home'] = 'Home page request manager';
 
 $string['editingteacher'] = 'Teacher';
 $string['teacher'] = 'Assistant';
-
+$string['access_denied'] = 'Access denied';
 $string['start_page_title'] = 'Prepare your request';
 $string['heading'] = 'Request manager';
 $string['new_courses'] = 'New courses';
@@ -43,9 +43,10 @@ $string['manage_btn_confirm'] = 'Confirm and delete';
 $string['manage_request_user'] = 'Submitted by';
 $string['manage_save_course'] = 'Create course';
 $string['manage_cancel_course'] = 'Cancel course';
-$string['manage_rearch_requests'] = 'Search requests';
+$string['manage_search_requests'] = 'Search requests';
 $string['manage_sel_user'] = 'Filter by User';
 $string['manage_filter_nouserselected'] = 'All users';
+$string['manage_filter_nostateselected'] = 'All requests';
 $string['manage_reject_req'] = 'Reject Request';
 $string['manage_save_req'] = 'Save Request';
 $string['manage_cancel_req'] = 'Cancel Request';
@@ -57,6 +58,9 @@ $string['delete_page_title'] = 'Delete existing courses';
 $string['delete_next'] = 'Delete selection';
 $string['delete_modal_cancel'] = 'Cancel';
 $string['delete_modal_confirm'] = 'Confirm';
+$string['delete_page_success'] = 'Request sent correctly.';
+$string['delete_page_error'] = 'Request insert error.';
+
 $string['delete_modal_body'] = 'Delete these existing courses. This peration is definitive and can\'t be undone';
 
 $string['filter_nocatselected'] = 'No categories selected';
@@ -68,11 +72,11 @@ $string['filter_bycat_allcat'] = 'Select All Categories';
  * Settings
  * **/
 // web services
-$string['usi_host_name'] = 'USI web service adress';
+$string['usi_host_name'] = 'USI web service address';
 $string['usi_host_description'] = 'The address of the USI web service';
 $string['usi_private_key_name'] = 'USI private key';
 $string['usi_private_key_description'] = 'The private key to access the USI web service';
-$string['supsi_host_name'] = 'SUPSI Host';
+$string['supsi_host_name'] = 'SUPSI  web service address';
 $string['supsi_host_description'] = 'The address of the SUPSI web service';
 $string['supsi_private_key_name'] = 'SUPSI private key';
 $string['supsi_private_key_description'] = 'The private key to access the SUPSI web service';

@@ -11,11 +11,11 @@ $PAGE->set_pagelayout('admin');
 $PAGE->set_title(get_string('pluginname', 'local_requestmanager'));
 $PAGE->set_heading(get_string('heading', 'local_requestmanager'));
 $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/local/requestmanager/js/main.js'));
-require_login();
+
 
 echo $OUTPUT->header();
 echo('<h2>' . get_string('manage_page_title', 'local_requestmanager') . '</h2><hr><br><div>');
-
+require_once('check_capabilities.php');
 
 // [Admin Actions] Test if there is a course to delete/create or a request to reject
 if (isset($_GET['cancel']) && $_GET['cancel'] > 0) {
@@ -92,39 +92,59 @@ if (isset($_GET['cancelreq']) && $_GET['cancelreq'] > 0) {
 }
 
 global $DB;
-$res = $DB->get_records('requestmanager_richiesta');
-
-$users = array();
-foreach ($res as $request) {
-    $req = new local_requestmanager\Richiesta($request->id);
-    $req->loadFromDB();
-    $users[$req->id_mdl_user][] = $req;
+// search users tha made requests
+$res = $DB->get_records('requestmanager_richiesta',null,null,"id_mdl_user");
+$users=array();
+foreach ($res as $usr) {
+    $users[] = $usr->id_mdl_user;
 }
-//echo '</pre>';
+
+// search requests
+$filters=array();
 
 $select = new FormSearchRequests(null, array('users' => $users));
 
 if ($fromform = $select->get_data()) {
-    if ($fromform->user != 0) {
-        foreach ($users as $id => $user) {
-            if ($id != $fromform->user) {
-                unset($users[$id]);
-            }
-        }
-    }
+    if ($fromform->user != 0) $filter_user=$fromform->user;
+    if ($fromform->state != 0) $filter_state_request=$fromform->state;
+}
+$select->display();
+// if non manager filter only my requests
+if (!is_siteadmin($USER->id) && !local_requestmanager\CEUtil::isManager($USER->id) ) $filter_user=$USER->id;
+
+if($filter_user && $filter_user>0){
+    $filters[]=$filter_user;
+    $filter_user='AND r.id_mdl_user=?';
+}
+if($filter_state_request && $filter_state_request!=''){
+    $filters[]=$filter_state_request;
+    $filter_stato='AND c.stato_richiesta=?';
 }
 
-if (is_siteadmin($USER->id)) {
-    $select->display();
-} else {
-    foreach ($users as $id => $user) {
-        if ($id != $USER->id) {
-            unset($users[$id]);
-        }
-    }
-}
+$query = "SELECT c.*,r.id_mdl_user FROM mdl_requestmanager_richiesta as r JOIN mdl_requestmanager_corso as c ON (c.id_requestmanager_richiesta=r.id) WHERE 1 $filter_user $filter_stato";
+//echo "$query".(implode(',',$filters));
+$res = $DB->get_records_sql($query, $filters);
 
-$form = new FormManage(null, array('requests' => $res, 'users' => $users));
+$users=array();
+foreach ($res as $course) {
+    if(!array_key_exists($course->id_mdl_user,$users)){
+        $users[$course->id_mdl_user]=array();
+    }
+    if(!array_key_exists($course->id_requestmanager_richiesta,$users[$course->id_mdl_user])){
+        $users[$course->id_mdl_user][$course->id_requestmanager_richiesta]=new local_requestmanager\Richiesta();
+        $users[$course->id_mdl_user][$course->id_requestmanager_richiesta]->setId($course->id_requestmanager_richiesta);
+    }
+    $c = new local_requestmanager\Corso($course->id);
+    $c->loadFromDB();
+    $users[$course->id_mdl_user][$course->id_requestmanager_richiesta]->addCorso($c);
+}
+//
+//echo '<pre>';
+//var_dump($res);
+//echo '</pre>';
+
+
+$form = new FormManage(null, array('requests' => $requests, 'users' => $users));
 $form->display();
 ?>
 

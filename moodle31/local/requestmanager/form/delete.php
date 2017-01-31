@@ -32,20 +32,21 @@ class FormCancella extends moodleform
 
                         $editingteachers = array();
                         foreach ($editingteachersResult as $editingteacher) {
-                            $editingteachers[] = array('id' => $editingteacher->id, 'name' => $editingteacher->lastname . ' ' . $editingteacher->firstname);
+                            $editingteachers[] = array('id' => $editingteacher->id, 'firstname' =>$editingteacher->firstname,'lastname' => $editingteacher->lastname );
                         }
 
                         $role = $DB->get_record('role', array('shortname' => 'teacher'));
                         $context = get_context_instance(CONTEXT_COURSE, $corso->instanceid);
-                        $editingteachersResult = get_role_users($role->id, $context);
+                        $teachersResult = get_role_users($role->id, $context);
 
                         $teachers = array();
-                        foreach ($editingteachersResult as $teacher) {
-                            $teachers[] = array('id' => $teacher->id, 'name' => $teacher->lastname . ' ' . $teacher->firstname);
+                        foreach ($teachersResult as $teacher) {
+                            $teachers[] = array('id' => $teacher->id, 'firstname' =>$teacher->firstname,'lastname' => $teacher->lastname );
                         }
 
                         $form->addElement('checkbox', 'name-' . $corso->instanceid, '', $details, array('value' => 'asd'), array('value' => 'asd'));
                         $data = array('id' => $corso->instanceid, 'title' => $corso->fullname, 'cat' => $corso->category, 'teachers' => $teachers, 'editingteacher' => $editingteachers);
+
                         $form->addElement('hidden', 'data-' . $corso->instanceid, json_encode($data));
                     }
 

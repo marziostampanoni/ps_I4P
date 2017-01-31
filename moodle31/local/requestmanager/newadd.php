@@ -7,12 +7,9 @@ $PAGE->set_pagelayout('admin');
 $PAGE->set_title(get_string('pluginname', 'local_requestmanager'));
 $PAGE->set_heading(get_string('pluginname', 'local_requestmanager'));
 $PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/requestmanager/js/main.js'));
-
-require_login();
-
 echo $OUTPUT->header();
 echo('<h2 style="">'.get_string('new_course_creation', 'local_requestmanager').'</h2>');
-
+require_once('check_capabilities.php');
 echo "<hr>";
 
 //delete course from session

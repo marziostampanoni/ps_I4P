@@ -11,11 +11,11 @@ $PAGE->set_pagelayout('admin');
 $PAGE->set_title("Course Creator");
 $PAGE->set_heading("Course Creator");
 $PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/requestmanager/js/main.js'));
-require_login();
+
 
 echo $OUTPUT->header();
 echo('<h2>'.get_string('clone_page_title','local_requestmanager').'</h2><hr><br><div>');
-
+require_once('check_capabilities.php');
 $query = "
 SELECT *  FROM
 mdl_user u

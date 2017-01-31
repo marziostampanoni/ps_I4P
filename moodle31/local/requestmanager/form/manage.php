@@ -10,12 +10,11 @@ class FormManage extends moodleform
 {
     protected function definition()
     {
-        global $USER;
-        global $DB;
+        global $USER,$DB;
 
         $eachCat = coursecat::make_categories_list();
         $form = $this->_form;
-        if (count($this->_customdata['requests']) > 0) {
+        if (count($this->_customdata['users']) > 0) {
             foreach ($this->_customdata['users'] as $userId => $requests) {
                 if(is_array($requests)) {
                     $user = $DB->get_record('user',array('id'=>$userId));

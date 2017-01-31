@@ -15,7 +15,7 @@ $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/local/requestmanager/js/mai
 
 echo $OUTPUT->header();
 echo('<h2>' . get_string('delete_page_title', 'local_requestmanager') . '</h2><hr><br><div>');
-
+require_once('check_capabilities.php');
 
 $query = "
 SELECT *  FROM
@@ -83,6 +83,8 @@ if($courses && count($courses)>0) {
         if($_SESSION['just_saved']){
             redirect(new moodle_url($CFG->wwwroot . '/local/requestmanager/start.php'));
         }
+        $id_cats_to_notify=array();
+
         $request = new local_requestmanager\Richiesta();
         $request->setIdMdlUser($USER->id);
         $request->setDataRichiesta(date('Y-m-d H:i:s'));
@@ -92,45 +94,49 @@ if($courses && count($courses)>0) {
                 $id = substr($name, strpos($name, "-") + 1);
                 $datasel = 'data-' . $id;
                 $data = json_decode($fromform->$datasel);
-                $corso = new local_requestmanager\Corso();
-                $corso->setIdMdlCourseCategories($data->cat);
-                $corso->setShortname('SOMSHRTNM');
-                $corso->setIdMdlCourse($data->id_mdl_course);
-                $corso->setStatoRichiesta(STATO_RICHIESTA_DA_GESTIRE);
-                $corso->setTipoRichiesta(TIPO_RICHIESTA_CANCELLARE);
-                $corso->setTitolo($data->title);
-                if (count($data->teachers > 0)) {
-                    foreach ($data->teachers as $teacher) {
-                        $user = new local_requestmanager\UserCorso();
-                        $user->setTipoRelazione(TIPO_RELAZIONE_ASSISTENTE);
-                        $user->setCognome($teacher->lastname);
-                        $user->setNome($teacher->firstname);
-                        $user->setIdMdlUser($teacher->id);
-                        $corso->addUser($user);
+
+                if(is_object($data)) {
+                    $id_cats_to_notify[] = $data->cat;
+                    $corso = new local_requestmanager\Corso();
+                    $corso->setIdMdlCourseCategories($data->cat);
+                    $corso->setShortname('SOMSHRTNM');
+                    $corso->setIdMdlCourse($data->id);
+                    $corso->setStatoRichiesta(STATO_RICHIESTA_DA_GESTIRE);
+                    $corso->setTipoRichiesta(TIPO_RICHIESTA_CANCELLARE);
+                    $corso->setTitolo($data->title);
+                    if (count($data->teachers > 0)) {
+                        foreach ($data->teachers as $teacher) {
+                            $user = new local_requestmanager\UserCorso();
+                            $user->setTipoRelazione(TIPO_RELAZIONE_ASSISTENTE);
+                            $user->setCognome($teacher->lastname);
+                            $user->setNome($teacher->firstname);
+                            $user->setIdMdlUser($teacher->id);
+                            $corso->addUser($user);
+                        }
                     }
-                }
-                if (count($data->editingteacher) > 0) {
-                    foreach ($data->editingteacher as $idTeacher => $editingteacher) {
-                        $user = new local_requestmanager\UserCorso();
-                        $user->setTipoRelazione(TIPO_RELAZIONE_DOCENTE);
-                        $user->setCognome($editingteacher->lastname);
-                        $user->setNome($editingteacher->firstname);
-                        $user->setIdMdlUser($editingteacher->id);
-                        $corso->addUser($user);
+                    if (count($data->editingteacher) > 0) {
+                        foreach ($data->editingteacher as $idTeacher => $editingteacher) {
+                            $user = new local_requestmanager\UserCorso();
+                            $user->setTipoRelazione(TIPO_RELAZIONE_DOCENTE);
+                            $user->setCognome($editingteacher->lastname);
+                            $user->setNome($editingteacher->firstname);
+                            $user->setIdMdlUser($editingteacher->id);
+                            $corso->addUser($user);
+                        }
                     }
+                    $request->addCorso($corso);
                 }
-                $request->addCorso($corso);
             }
         }
 
-        if ($request->saveToDB()) {
+        if (count($request->getCorsiRichiesti())>0 && $request->saveToDB()) {
             $_SESSION['just_saved']=true;
 
-//            if(get_config('local_requestmanager','notify_manager_by_mail')==1){
-//                foreach ($id_cats_to_notify as $id_cat){
-//                    if(local_requestmanager\CEUtil::mailNotificationToManager($id_cat));
-//                }
-//            }
+            if(get_config('local_requestmanager','notify_manager_by_mail')==1){
+                foreach ($id_cats_to_notify as $id_cat){
+                    if(local_requestmanager\CEUtil::mailNotificationToManager($id_cat));
+                }
+            }
             echo '<div class="alert alert-success">
                     ' . get_string('delete_page_success', 'local_requestmanager') . '
                 </div>';
@@ -140,7 +146,7 @@ if($courses && count($courses)>0) {
                 </div>';
         }
         echo '<br><a type="button" class="btn btn-primary btn-lg" href="manage.php">' . get_string('manage_courses', 'local_requestmanager') . '</a>';
-        echo '  <a type="button" class="btn btn-info btn-lg" href="start.php">' . get_string('pluginname', 'local_requestmanager') . '</a>';
+        echo '  <a type="button" class="btn btn-info btn-lg" href="start.php">' . get_string('plugin_home', 'local_requestmanager') . '</a>';
     }else{
         $_SESSION['just_saved']=false;
         $filter->display();
