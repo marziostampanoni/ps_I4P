@@ -23,8 +23,6 @@ if ($fromform = $form->get_data()) {
     $data = $_SESSION['courses_to_insert'];
 }
 
-//echo '<pre>';
-//var_dump($data);
 if (isset($_GET['updateEnroll']) && $_GET['updateEnroll'] != '') {
     $idCorso = $_GET['id'];
     $ids = explode('_', $_GET['c']);

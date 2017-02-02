@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Rezart Lohja
- * Date: 12.01.17
- * Time: 19:07
- */
 
 
 function local_requestmanager_extend_navigation(global_navigation $navigation)

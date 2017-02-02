@@ -75,8 +75,5 @@ if(count($_SESSION['courses_to_insert'])>0) {
 
 
 
-
-
-
 echo $OUTPUT->footer();
 ?>

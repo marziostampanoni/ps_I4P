@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Rezart Lohja
- * Date: 15.01.17
- * Time: 09:47
- */
 namespace local_requestmanager;
 
 class Corso

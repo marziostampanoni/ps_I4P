@@ -1,6 +1,7 @@
 <?php
 namespace local_requestmanager;
 
+
 class UserCorso
 {
     var $id;

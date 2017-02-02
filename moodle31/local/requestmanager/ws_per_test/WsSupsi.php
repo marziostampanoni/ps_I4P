@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Rezart Lohja
- * Date: 14.01.17
- * Time: 11:09
- */
 
 require_once('Ws.php');
 class WsSupsi implements Ws

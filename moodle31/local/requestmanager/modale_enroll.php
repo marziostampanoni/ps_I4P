@@ -9,11 +9,12 @@
 </div>
 <div class="modal-body" id="enroll-modal-body">
     <table class="generaltable table-bordered">
-        <tbody id="enrolled"></tbody>
+        <tbody id="enrolled"><label><b>Enrolled</b></label></tbody>
     </table>
     <hr>
     <table class="generaltable table-bordered">
         <tbody id="notenrolled">
+        <label><b>Not Enrolled</b></label>
         <?php
         $query = 'select u.id as id, firstname, lastname, picture, imagealt, email from mdl_role_assignments as a, mdl_user as u where roleid in (3,4) and a.userid=u.id;';
         $res = $DB->get_records_sql($query, array());

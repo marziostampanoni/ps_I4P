@@ -1,12 +1,4 @@
 <?php
-
-/**
- * Created by PhpStorm.
- * User: Rezart Lohja
- * Date: 14.01.17
- * Time: 00:29
- */
-
 require_once("$CFG->libdir/formslib.php");
 
 class FormSelectCourses extends moodleform
