@@ -36,7 +36,9 @@ class FormManage extends moodleform
                             $form->addElement('html', '<tr>');
                             $form->addElement('html', '<td colspan="2" style="width: 70%; border: none;padding: 0px 10px;"> <label>' . get_string('resume_tablehead_title', 'local_requestmanager') . '</label>  ');
                             $form->addElement('html', '<span style="top: -10px;" class="label label-' . local_requestmanager\CEUtil::getStyleTipoRichiesta($corso->tipo_richiesta) . '">' . local_requestmanager\CEUtil::tipoRichiesta($corso->tipo_richiesta) . '</span>');
-                            $form->addElement('html', '<span style="top: -10px; color:greenyellow;margin-left: 5px;" class="label">Done &#10004;</span>');
+                            if($corso->stato_richiesta == STATO_RICHIESTA_FATTO){
+                                $form->addElement('html', '<span style="top: -10px; color:greenyellow;margin-left: 5px;" class="label">Done &#10004;</span>');
+                            }
                             $form->addElement('html', '<input ' . ($corso->tipo_richiesta == TIPO_RICHIESTA_CANCELLARE || $corso->stato_richiesta == STATO_RICHIESTA_FATTO ? 'disabled' : '') . ' style="width:100%;" id="coursetitle_' . $corso->id . '" name="titolo-' . $corso->id . '" type="text" value="' . $corso->titolo . '" style="display:table-cell; width:95%">');
                             $form->addElement('html', '</td>');
                             $form->addElement('html', '<td style="border: none;padding: 0px 10px;"><label>' . get_string('manage_tablehead_shortname', 'local_requestmanager') . '</label><input ' . ($corso->tipo_richiesta == TIPO_RICHIESTA_CANCELLARE || $corso->stato_richiesta == STATO_RICHIESTA_FATTO ? 'disabled' : '') . ' name="shortname-' . $corso->id . '" type="text" value="' . $corso->shortname . '" size="40" style="display:table-cell; width:95%"></td>');
@@ -69,7 +71,7 @@ class FormManage extends moodleform
                                     $form->addElement('html', '<li class="editingteacher_' . $corso->id . '" value="' . $option->id . '" style="white-space: nowrap;">' . $option->nome . ' ' . $option->cognome . '</li>');
                                 }
                             }
-                            if ($corso->tipo_richiesta != TIPO_RICHIESTA_CANCELLARE || $corso->stato_richiesta == STATO_RICHIESTA_FATTO) $form->addElement('html', '</ul><button class="btn" onclick="enroll(\'' . $corso->id . '\', \'0\');" data-toggle="modal" data-target="#enrollModal">Enroll</button></td>');
+                            if ($corso->tipo_richiesta != TIPO_RICHIESTA_CANCELLARE || ($corso->tipo_richiesta != TIPO_RICHIESTA_CANCELLARE && $corso->stato_richiesta == STATO_RICHIESTA_FATTO)) $form->addElement('html', '</ul><button class="btn" onclick="enroll(\'' . $corso->id . '\', \'0\');" data-toggle="modal" data-target="#enrollModal">Enroll</button></td>');
 
                             $form->addElement('html', '<td style="border: none;padding: 0px 10px;"><label>' . get_string('resume_tablehead_teacher', 'local_requestmanager') . '</label><ul id="teachers_list_' . $corso->id . '">');
                             if (is_array($assistenti)) {
@@ -77,7 +79,7 @@ class FormManage extends moodleform
                                     $form->addElement('html', '<li class="teacher_' . $corso->id . '" value="' . $option->id . '" style="white-space: nowrap;">' . $option->nome . ' ' . $option->cognome . '</li>');
                                 }
                             }
-                            if ($corso->tipo_richiesta != TIPO_RICHIESTA_CANCELLARE || $corso->stato_richiesta == STATO_RICHIESTA_FATTO) $form->addElement('html', '</ul><button class="btn" onclick="enroll(\'' . $corso->id . '\', \'1\');" data-toggle="modal" data-target="#enrollModal">Enroll</button></td>');
+                            if ($corso->tipo_richiesta != TIPO_RICHIESTA_CANCELLARE || ($corso->tipo_richiesta != TIPO_RICHIESTA_CANCELLARE&&$corso->stato_richiesta == STATO_RICHIESTA_FATTO)) $form->addElement('html', '</ul><button class="btn" onclick="enroll(\'' . $corso->id . '\', \'1\');" data-toggle="modal" data-target="#enrollModal">Enroll</button></td>');
 
                             $form->addElement('html', '</tr>');
                             if ($corso->stato_richiesta != STATO_RICHIESTA_FATTO) {
